@@ -51,6 +51,7 @@ function App() {
       </p>
       <Hello /> this from react component
       {reactElement} this from reactElement
+      <h1 className="header">Hello react!</h1>
     </>
   );
 }
