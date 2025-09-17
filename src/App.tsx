@@ -4,6 +4,14 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Hello from "./Hello";
 
+import { createElement } from "react";
+
+const reactElement = createElement(
+  "h1",
+  null,
+  createElement("span", null, "I am inside span")
+);
+
 function App() {
   const [count, setCount] = useState(0);
 
@@ -27,9 +35,10 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on the Vite and React logos to learn more !!!
       </p>
-      <Hello />
+      <Hello /> this from react component
+      {reactElement} this from reactElement
     </>
   );
 }
