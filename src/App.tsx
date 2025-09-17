@@ -12,12 +12,18 @@ import Hello from "./Hello";
 //   null,
 //   createElement("span", null, "I am inside span")
 // );
+
+// imperative code create element
+// const h1 = document.createElement("h1")
+// h1.textContent = "This is imperative coding"
+// h1.className = "header"
+// document.getElementById("root").appendChild(h1)
+
 const reactElement = (
   <h1>
     <span>Hello from TSX</span>
   </h1>
 );
-console.log(reactElement);
 function App() {
   const [count, setCount] = useState(0);
 
