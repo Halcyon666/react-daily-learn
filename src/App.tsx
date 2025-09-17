@@ -4,14 +4,20 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Hello from "./Hello";
 
-import { createElement } from "react";
+// import { createElement } from "react";
 
-const reactElement = createElement(
-  "h1",
-  null,
-  createElement("span", null, "I am inside span")
+// we need not this
+// const reactElement = createElement(
+//   "h1",
+//   null,
+//   createElement("span", null, "I am inside span")
+// );
+const reactElement = (
+  <h1>
+    <span>Hello from TSX</span>
+  </h1>
 );
-
+console.log(reactElement);
 function App() {
   const [count, setCount] = useState(0);
 
