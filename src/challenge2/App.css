@@ -19,6 +19,9 @@ h1 {
     justify-content: space-between;
 }
 
+.header-logo {
+    width: 55px;
+}
 
 .nav-list {
     list-style: none;
@@ -26,6 +29,6 @@ h1 {
 }
 
 .nav-list-item {
-    margin-right: 10px;
+    margin-left: 10px;
     font-size: 1.1rem;
 }
