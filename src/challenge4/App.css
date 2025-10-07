@@ -3,6 +3,7 @@ body {
     margin: 0;
 }
 
+
 .container {
     margin: 45px 40px;
 }
@@ -11,9 +12,9 @@ header {
     background: #F55A5A;
     display: flex;
     justify-content: center;
+    align-items: center;
     color: white;
     height: 55px;
-    align-items: center;
 }
 
 header>img {
@@ -26,19 +27,16 @@ header>h1 {
     font-weight: 500;
 }
 
-/* 修正拼写错误 */
 article.journal-entry {
     display: flex;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    align-items: flex-start;
 }
 
-.main-image-container {
+article.journal-entry .marker {
+    width: 7px;
+    margin-right: 4px;
+}
+
+article.journal-entry .main-image-container {
     width: 125px;
     height: 168px;
     overflow: hidden;
@@ -51,38 +49,17 @@ article.journal-entry .main-image {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 5px;
-}
-
-.info-container {
-    flex: 1;
-}
-
-.location-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.marker {
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
-    vertical-align: middle;
 }
 
 .info-container span.country {
     text-transform: uppercase;
     font-size: 0.7rem;
     margin-right: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
 }
 
 .info-container a {
-    color: #888;
+    color: #2B283A;
     font-size: 0.7rem;
-    text-decoration: underline;
 }
 
 .info-container a:visited {
@@ -92,18 +69,15 @@ article.journal-entry .main-image {
 .info-container h2.entry-title {
     margin-top: 7px;
     margin-bottom: 17px;
-    font-size: 1.7rem;
 }
 
 .info-container p.trip-dates {
     font-weight: bold;
-    margin: 0 0 1rem 0;
 }
 
 .info-container p.entry-text {
     line-height: 1.5;
     font-size: 0.8rem;
-    margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
