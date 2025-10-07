@@ -1,10 +1,15 @@
 export default interface JokeInfo {
   id: number;
-  setup: string;
+  setup?: string;
   punchline: string;
 }
 
 export const jokes = [
+  {
+    id: -1,
+    punchline:
+      "It's hard to explain puns to kleptomaniacs because they always take things literally",
+  },
   {
     id: 0,
     setup: "I got my daughter a fridge for her birthday.",

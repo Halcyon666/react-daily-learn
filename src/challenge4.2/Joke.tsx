@@ -3,8 +3,8 @@ import type JokeInfo from "./JokerInfo";
 export default function Joke({ setup, punchline }: JokeInfo) {
   return (
     <>
-      <p>{setup}</p>
-      <p>{punchline}</p>
+      {setup && <p className="setup">setup: {setup}</p>}
+      <p>punchline: {punchline}</p>
       <hr />
     </>
   );
