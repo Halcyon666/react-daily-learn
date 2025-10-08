@@ -4,7 +4,6 @@ import App from "./challenge4/App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    AAA
     <App />
   </StrictMode>
 );
