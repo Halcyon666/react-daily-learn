@@ -2,6 +2,7 @@ import phoneIcon from "./images/phone-icon.png";
 import mailIcon from "./images/mail-icon.png";
 import type ContactInfo from "./ContactInfo";
 
+// Object destructuring
 export default function Contact({
   img,
   imgAlt,

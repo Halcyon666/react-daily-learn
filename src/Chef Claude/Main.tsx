@@ -1,16 +1,24 @@
+import { useState } from "react";
+
 export default function Main() {
-  const ingredients = ["Chicken", "Oregano", "Tomatoes"];
-  // ============================
-  // tips this changes will not re-render by react.
-  // page render a new url. so prevent it
+  // Array destructuring
+  const [ingredients, setIngredients] = useState<string[]>([
+    "Chicken",
+    "Oregano",
+    "Tomatoes",
+  ]);
+  //   const ingredients = ["Chicken", "Oregano", "Tomatoes"];
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     // the key is the name of input
     const newIngredient = formData.get("ingredient");
     if (typeof newIngredient === "string" && newIngredient?.trim() !== "") {
-      ingredients.push(newIngredient.trim());
-      console.log(ingredients);
+      // ============================
+      // tips this changes will not re-render by react.
+      // page render a new url. so prevent it
+      // ingredients.push(newIngredient.trim());
+      setIngredients((prev) => [...prev, newIngredient]);
     } else {
       console.warn("No ingredient provided");
     }
