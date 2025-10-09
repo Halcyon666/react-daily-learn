@@ -72,3 +72,16 @@ main {
     content: "+";
     margin-right: 5px;
 }
+
+.ingredient-ul {
+    padding: 30px 30px 10px;
+}
+
+.ingredient-ul>li {
+    justify-content: center;
+    color: grey;
+}
+
+.ingredient-ul>li::marker {
+    color: #141413;
+}
