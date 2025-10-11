@@ -37,12 +37,14 @@ export default function Main() {
         ></input>
         <button>Add ingredient</button>
       </form>
-      <h1>Ingrredients on hand:</h1>
-      <ul className="ingredient-ul">
-        {ingredients.map((ingredient) => (
-          <li key={ingredient}>{ingredient}</li>
-        ))}
-      </ul>
+      <section className="ingredients">
+        <h2>Ingrredients on hand:</h2>
+        <ul>
+          {ingredients.map((ingredient) => (
+            <li key={ingredient}>{ingredient}</li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

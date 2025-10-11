@@ -32,7 +32,11 @@ header>h1 {
 }
 
 main {
+    margin: 0 10px;
     padding: 30px 30px 10px;
+    border: 1px solid #32a852;
+    /* optional: the green box you had */
+    border-radius: 8px;
 }
 
 .add-ingredient-form {
@@ -73,15 +77,20 @@ main {
     margin-right: 5px;
 }
 
-.ingredient-ul {
-    padding: 30px 30px 10px;
-}
-
-.ingredient-ul>li {
+.ingredients {
+    display: flex;
     justify-content: center;
-    color: grey;
+    align-items: center;
+    flex-direction: column;
+    /* Stack vertically */
+
+
 }
 
-.ingredient-ul>li::marker {
-    color: #141413;
+.ingredients>h2 {
+    margin-bottom: 10px;
+}
+
+.ingredients>ul {
+    margin-right: 160px;
 }
