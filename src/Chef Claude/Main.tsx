@@ -2,13 +2,9 @@ import { useState } from "react";
 
 export default function Main() {
   // Array destructuring
-  const [ingredients, setIngredients] = useState<string[]>([
-    "Chicken",
-    "Oregano",
-    "Tomatoes",
-  ]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
   //   const ingredients = ["Chicken", "Oregano", "Tomatoes"];
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+  /*   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     // the key is the name of input
@@ -24,11 +20,27 @@ export default function Main() {
     }
 
     console.log(ingredients);
+  }; */
+
+  /*   const addIngredient = (formData: FormData) => {
+    const ingredient = getStringField(formData, "ingredient");
+    if (!ingredient) return;
+    setIngredients((prev) => [...prev, ingredient]);
   };
 
+  const getStringField = (formdata: FormData, key: string): string => {
+    const value = formdata.get(key);
+    return typeof value === "string" && value.trim() ? value.trim() : "";
+  }; */
+
+  const addIngredient = (formData: FormData) => {
+    const newIngredient = formData.get("ingredient")?.toString().trim();
+    if (!newIngredient) return;
+    setIngredients((prev) => [...prev, newIngredient]);
+  };
   return (
     <main>
-      <form className="add-ingredient-form" onSubmit={handleSubmit}>
+      <form className="add-ingredient-form" action={addIngredient}>
         <input
           type="text"
           name="ingredient"
