@@ -14,12 +14,12 @@ export default function App() {
       {/* {unreadNum && (
         <h1>You have {!unreadNum ? "no" : unreadNum} unread messages!</h1>
       )} */}
-      <h1>You have {!unreadNum ? "no" : unreadNum} unread messages!</h1>
+      {/* <h1>You have {!unreadNum ? "no" : unreadNum} unread messages!</h1>
       <ul>
         {unreadMessages.map((msg) => (
           <li>{msg}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
