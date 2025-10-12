@@ -12,7 +12,11 @@ export default function Joke({ setup, punchline }: JokeInfo) {
     <>
       {setup && <h3 className="setup">setup: {setup}</h3>}
       {isShow && <p>punchline: {punchline}</p>}
-      <button onClick={changeVisible}>change punchline visible</button>
+      {/*       {!isShow && <button onClick={changeVisible}>show punchline</button>}
+      {isShow && <button onClick={changeVisible}>hide punchline</button>} */}
+      <button onClick={changeVisible}>
+        {isShow ? "hide" : "show"} punchline
+      </button>
       <hr />
       {/* isShow: {String(isShow)} */}
     </>
