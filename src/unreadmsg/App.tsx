@@ -5,6 +5,12 @@ export default function App() {
   const [unreadMessages, setUnreadMessages] = React.useState(["a", "b"]);
 
   const unreadNum = unreadMessages.length;
+  const msgToShow =
+    unreadNum == 0
+      ? "You're caught up!"
+      : unreadNum == 1
+      ? "You have 1 unread message"
+      : `You have ${unreadNum} unread messages`;
 
   return (
     <div>
@@ -20,6 +26,7 @@ export default function App() {
           <li>{msg}</li>
         ))}
       </ul> */}
+      <h1>{msgToShow}</h1>
     </div>
   );
 }
