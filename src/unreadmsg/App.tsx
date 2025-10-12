@@ -4,10 +4,6 @@ import "./style.css";
 export default function App() {
   const [unreadMessages, setUnreadMessages] = React.useState(["a", "b"]);
 
-  /**
-   * Challenge:
-   * Only display the <h1> below if there are unread messages
-   */
   const unreadNum = unreadMessages.length;
 
   return (
