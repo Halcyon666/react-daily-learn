@@ -4,16 +4,13 @@ import "./style.css";
 export default function App() {
   const [unreadMessages, setUnreadMessages] = React.useState(["a", "b"]);
 
-  const getShowMsg = (): string => {
-    const unreadNum = unreadMessages.length;
-    const msgToShow =
-      unreadNum == 0
-        ? "You're caught up!"
-        : unreadNum == 1
-        ? "You have 1 unread message"
-        : `You have ${unreadNum} unread messages`;
-    return msgToShow;
-  };
+  const unreadNum = unreadMessages.length;
+  const getShowMsg = (unreadNum: number): string =>
+    unreadNum === 0
+      ? "You're caught up!"
+      : unreadNum === 1
+      ? "You have 1 unread message"
+      : `You have ${unreadNum} unread messages`;
 
   return (
     <div>
@@ -29,7 +26,7 @@ export default function App() {
           <li>{msg}</li>
         ))}
       </ul> */}
-      <h1>{getShowMsg()}</h1>
+      <h1>{getShowMsg(unreadNum)}</h1>
     </div>
   );
 }
