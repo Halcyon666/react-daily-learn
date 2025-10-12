@@ -46,6 +46,7 @@ export default function Main() {
           name="ingredient"
           aria-label="Add ingredient"
           placeholder="e.g. oregano"
+          defaultValue="🍎"
         ></input>
         <button>Add ingredient</button>
       </form>
