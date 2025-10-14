@@ -4,7 +4,7 @@ export interface PadInfo {
   on: boolean;
 }
 export interface PadProp extends PadInfo {
-  toggle: () => void;
+  toggle: (id: number) => void;
 }
 
 export const padsData: PadInfo[] = [

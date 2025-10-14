@@ -1,16 +1,14 @@
-import { useState } from "react";
 import type { PadProp } from "./pads";
 
-export default function Pad({ color, on, toggle }: PadProp) {
+export default function Pad({ id, color, on, toggle }: PadProp) {
   // import hold another status in Pad component. instead of using original in parent component
   // but this is a derived state
-  const [innerOn, setInnerOn] = useState(on);
-  console.log(toggle);
+  //  const [innerOn, setInnerOn] = useState(on);
   return (
     <button
-      onClick={toggle}
+      onClick={() => toggle(id)}
       style={{ backgroundColor: color }}
-      className={innerOn ? "on" : undefined}
+      className={on ? "on" : undefined}
     ></button>
   );
 }
