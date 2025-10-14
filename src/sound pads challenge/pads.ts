@@ -3,6 +3,9 @@ export interface PadInfo {
   color: string;
   on: boolean;
 }
+export interface PadProp extends PadInfo {
+  toggle: () => void;
+}
 
 export const padsData: PadInfo[] = [
   {

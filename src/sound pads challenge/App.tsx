@@ -5,11 +5,15 @@ import Pad from "./Pad";
 
 export default function App() {
   const [pads, setPads] = React.useState<PadInfo[]>(padsData);
-
-  const buttonElements = pads.map((pad) => <Pad key={pad.id} {...pad} />);
+  const toggle = () => {
+    console.log("clicked!");
+  };
+  const buttonElements = pads.map((pad) => (
+    <Pad toggle={toggle} key={pad.id} {...pad} />
+  ));
   return (
     <main>
-      <div className="pad-container">{buttonElements}AA</div>
+      <div className="pad-container">{buttonElements}</div>
     </main>
   );
 }
