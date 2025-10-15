@@ -2,11 +2,6 @@ import { useState } from "react";
 import ClaudeRecipe from "./ClaudeRecipe";
 import IngredientsList from "./IngredientsList";
 
-export interface IngredientsListProp {
-  ingredients: string[];
-  getRecipe: () => void;
-}
-
 export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([
     "all the main spices",

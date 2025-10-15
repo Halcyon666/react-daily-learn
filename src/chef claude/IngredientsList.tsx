@@ -1,10 +1,9 @@
-import type { IngredientsListProp } from "./Main";
 import React from "react";
 
-const IngredientsList: React.FC<IngredientsListProp> = ({
-  ingredients,
-  getRecipe,
-}: IngredientsListProp) => {
+const IngredientsList: React.FC<{
+  ingredients: string[];
+  getRecipe: () => void;
+}> = ({ ingredients, getRecipe }) => {
   const ingredientsListItems = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
