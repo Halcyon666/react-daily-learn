@@ -17,7 +17,10 @@ export default function Main() {
   };
 
   const [recipteShown, setRecipeShown] = useState(false);
-  const getRecipe = () => setRecipeShown((prev) => !prev);
+  const getRecipe = () => {
+    setRecipeShown((prev) => !prev);
+    console.log("get recipe called!");
+  };
 
   return (
     <main>
