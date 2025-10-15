@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ClaudeRecipe from "./ClaudeRecipe";
 import IngredientsList from "./IngredientsList";
+import { getRecipeFromChefClaude } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([
@@ -16,10 +17,12 @@ export default function Main() {
     setIngredients((prev) => [...prev, newIngredient]);
   };
 
-  const [recipteShown, setRecipeShown] = useState(false);
-  const getRecipe = () => {
+  const [recipeShown, setRecipeShown] = useState(false);
+  const [recipeResult, setRecipeResult] = useState<string>("");
+  const getRecipe = async () => {
     setRecipeShown((prev) => !prev);
-    console.log("get recipe called!");
+    const recipe = await getRecipeFromChefClaude(ingredients);
+    setRecipeResult(recipe);
   };
 
   return (
@@ -37,7 +40,7 @@ export default function Main() {
       {ingredients.length > 0 && (
         <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
-      {recipteShown && <ClaudeRecipe />}
+      {recipeShown && <ClaudeRecipe recipe={recipeResult} />}
     </main>
   );
 }

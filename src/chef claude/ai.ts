@@ -20,7 +20,7 @@ const anthropic = new Anthropic({
   // Make sure you set an environment variable in Scrimba
   // for ANTHROPIC_API_KEY
   apiKey,
-  baseURL: "https://api.siliconflow.cn/v1/messages",
+  baseURL: "https://api.siliconflow.cn",
   dangerouslyAllowBrowser: true,
 });
 
