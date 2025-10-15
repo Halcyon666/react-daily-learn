@@ -1,6 +1,7 @@
 import type { PadProp } from "./pads";
+import React from "react";
 
-export default function Pad({ id, color, on, toggle }: PadProp) {
+const Pad: React.FC<PadProp> = ({ id, color, on, toggle }: PadProp) => {
   // import hold another status in Pad component. instead of using original in parent component
   // but this is a derived state
   //  const [innerOn, setInnerOn] = useState(on);
@@ -11,4 +12,6 @@ export default function Pad({ id, color, on, toggle }: PadProp) {
       className={on ? "on" : undefined}
     ></button>
   );
-}
+};
+
+export default Pad;
