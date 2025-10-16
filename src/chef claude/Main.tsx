@@ -17,11 +17,10 @@ export default function Main() {
     setIngredients((prev) => [...prev, newIngredient]);
   };
 
-  const [recipeShown, setRecipeShown] = useState(false);
   const [recipeResult, setRecipeResult] = useState<string>("");
   const getRecipe = async () => {
-    setRecipeShown((prev) => !prev);
     const recipe = await getRecipeFromChefClaude(ingredients);
+    console.log(recipe);
     setRecipeResult(recipe);
   };
 
@@ -40,7 +39,7 @@ export default function Main() {
       {ingredients.length > 0 && (
         <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
-      {recipeShown && <ClaudeRecipe recipe={recipeResult} />}
+      <ClaudeRecipe recipe={recipeResult} />
     </main>
   );
 }

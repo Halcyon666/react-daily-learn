@@ -29,7 +29,7 @@ export async function getRecipeFromChefClaude(ingredientsArr: string[]) {
 
   const msg = await anthropic.messages.create({
     model: "Qwen/Qwen3-32B",
-    max_tokens: 1024,
+    max_tokens: 2048,
     system: SYSTEM_PROMPT,
     messages: [
       {
@@ -38,5 +38,7 @@ export async function getRecipeFromChefClaude(ingredientsArr: string[]) {
       },
     ],
   });
-  return msg.content[0].text;
+
+  // index 0 is thinking block and 1 is the answer
+  return msg.content[1].text;
 }
