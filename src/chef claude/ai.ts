@@ -42,3 +42,38 @@ export async function getRecipeFromChefClaude(ingredientsArr: string[]) {
   // index 0 is thinking block and 1 is the answer
   return msg.content[1].text;
 }
+
+/**
+ * 流式生成食谱
+ * @param ingredientsArr 配料数组
+ * @param onChunk 每次收到新内容时触发（追加字符串）
+ */
+export async function getRecipeFromChefClaudeStream(
+  ingredientsArr: string[],
+  onChunk: (text: string) => void
+) {
+  const ingredientsString = ingredientsArr.join(", ");
+
+  // 调用流式接口
+  const stream = await anthropic.messages.stream({
+    model: "Qwen/Qwen3-32B",
+    max_tokens: 2048,
+    system: SYSTEM_PROMPT,
+    messages: [
+      {
+        role: "user",
+        content: `I have ${ingredientsString}. Please give me a recipe you'd recommend I make!`,
+      },
+    ],
+  });
+
+  // 持续读取事件流
+  for await (const event of stream) {
+    if (event.type === "content_block_delta") {
+      const delta = (event as any).delta;
+      if (delta?.type === "text_delta" && delta?.text) {
+        onChunk(delta.text); // 每一小段内容触发回调
+      }
+    }
+  }
+}

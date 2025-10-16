@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ClaudeRecipe from "./ClaudeRecipe";
 import IngredientsList from "./IngredientsList";
-import { getRecipeFromChefClaude } from "./ai";
+import { getRecipeFromChefClaude, getRecipeFromChefClaudeStream } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([
@@ -16,12 +16,16 @@ export default function Main() {
     if (!newIngredient) return;
     setIngredients((prev) => [...prev, newIngredient]);
   };
+  const [recipeShown, setRecipeShown] = useState(false);
 
   const [recipeResult, setRecipeResult] = useState<string>("");
   const getRecipe = async () => {
-    const recipe = await getRecipeFromChefClaude(ingredients);
-    console.log(recipe);
-    setRecipeResult(recipe);
+    setRecipeShown(true);
+    setRecipeResult(""); // 清空
+    await getRecipeFromChefClaudeStream(ingredients, (chunk) => {
+      // 立即追加并触发渲染
+      setRecipeResult((prev) => prev + chunk);
+    });
   };
 
   return (
@@ -32,14 +36,21 @@ export default function Main() {
           name="ingredient"
           aria-label="Add ingredient"
           placeholder="e.g. oregano"
-          defaultValue="🍎"
+          // defaultValue="🍎"
         ></input>
         <button>Add ingredient</button>
       </form>
       {ingredients.length > 0 && (
         <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
-      <ClaudeRecipe recipe={recipeResult} />
+      {recipeShown && !recipeResult ? (
+        <div className="loading-placeholder">
+          <div className="spinner" />
+          <p>Chef Claude is thinking... 🍳</p>
+        </div>
+      ) : (
+        <ClaudeRecipe recipe={recipeResult} />
+      )}
     </main>
   );
 }
