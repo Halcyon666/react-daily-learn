@@ -22,10 +22,12 @@ export default function Main() {
   const [memes, setMemes] = useState<Meme[]>();
 
   useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((res) => res.json())
-      .then((data) => data.data.memes)
-      .then((memes) => setMemes(memes));
+    async function fetchMemes() {
+      const res = await fetch("https://api.imgflip.com/get_memes");
+      const data = await res.json();
+      setMemes(data.data.memes);
+    }
+    fetchMemes();
   }, []);
 
   return (
