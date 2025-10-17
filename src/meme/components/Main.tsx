@@ -1,5 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+interface Meme {
+  id: string;
+  name: string;
+  url: string;
+  width: number;
+  height: number;
+  box_count: number;
+}
 export default function Main() {
   const [meme, setMeme] = useState({
     topText: "One does not simply",
@@ -11,6 +19,14 @@ export default function Main() {
     const { name, value } = event.currentTarget;
     setMeme((prev) => ({ ...prev, [name]: value }));
   };
+  const [memes, setMemes] = useState<Meme[]>();
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => data.data.memes)
+      .then((memes) => setMemes(memes));
+  }, []);
 
   return (
     <main>
