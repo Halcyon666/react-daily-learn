@@ -1,9 +1,10 @@
-import React from "react";
+import React, { type Ref } from "react";
 
 const IngredientsList: React.FC<{
   ingredients: string[];
   getRecipe: () => void;
-}> = ({ ingredients, getRecipe }) => {
+  recipeSection: Ref<HTMLDivElement>;
+}> = ({ ingredients, getRecipe, recipeSection }) => {
   const ingredientsListItems = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
@@ -15,7 +16,7 @@ const IngredientsList: React.FC<{
       </ul>
       {ingredients.length > 3 && (
         <div className="get-recipe-container">
-          <div>
+          <div ref={recipeSection}>
             <h3>Ready for a recipe?</h3>
             <p>Generate a recipe from your list of ingredients.</p>
           </div>

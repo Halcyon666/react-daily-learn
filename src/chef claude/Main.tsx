@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ClaudeRecipe from "./ClaudeRecipe";
 import IngredientsList from "./IngredientsList";
-import { getRecipeFromChefClaude, getRecipeFromChefClaudeStream } from "./ai";
+import { getRecipeFromChefClaudeStream } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = useState<string[]>([
@@ -28,6 +28,11 @@ export default function Main() {
     });
   };
 
+  const recipeSection = useRef<HTMLDivElement>(null);
+  console.log(recipeSection);
+  useEffect(() => {
+    recipeSection.current?.scrollIntoView();
+  }, [recipeResult]);
   return (
     <main>
       <form className="add-ingredient-form" action={addIngredient}>
@@ -41,7 +46,11 @@ export default function Main() {
         <button>Add ingredient</button>
       </form>
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+          recipeSection={recipeSection}
+        />
       )}
       {recipeShown && !recipeResult ? (
         <div className="loading-placeholder">
