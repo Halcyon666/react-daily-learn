@@ -3,26 +3,29 @@
 }
 
 body {
+    /* this will set by default */
+    /* width: auto; */
     margin: 0;
-    background-color: orange;
+    background-color: #0B2434;
+    padding: 20px;
+    height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    height: 90vh;
+    align-items: center;
 }
 
-.main {
-    height: 500px;
-    width: 500px;
-    background-color: black;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+div#root {
+    height: 100%;
+    width: 100%;
+    max-height: 400px;
+    max-width: 400px;
 }
 
-.main>div {
-    background-color: white;
-    height: 450px;
-    width: 450px;
+main {
+    background-color: #F5F5F5;
+    height: 100%;
+    /* No need to set explicitly */
+    /* width: auto; */
+    border-radius: 5px;
 }
