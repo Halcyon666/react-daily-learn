@@ -19,7 +19,7 @@ export default function Main() {
     const { name, value } = event.currentTarget;
     setMeme((prev) => ({ ...prev, [name]: value }));
   };
-  const [memes, setMemes] = useState<Meme[]>();
+  const [memes, setMemes] = useState<Meme[]>([]);
 
   useEffect(() => {
     async function fetchMemes() {
@@ -30,6 +30,12 @@ export default function Main() {
     fetchMemes();
   }, []);
 
+  const getRandomImage = () => {
+    const index = Math.floor(Math.random() * memes.length);
+    console.log(index);
+    const imgSrc = memes[index].url;
+    setMeme((prev) => ({ ...prev, imgSrc }));
+  };
   return (
     <main>
       <div className="form">
@@ -54,7 +60,7 @@ export default function Main() {
             name="bottomText"
           />
         </label>
-        <button>Get a new meme image 🖼</button>
+        <button onClick={getRandomImage}>Get a new meme image 🖼</button>
       </div>
       <div className="meme">
         <img src={meme.imgSrc} />
