@@ -31,7 +31,17 @@ export default function Main() {
   const recipeSection = useRef<HTMLDivElement>(null);
   console.log(recipeSection);
   useEffect(() => {
-    recipeSection.current?.scrollIntoView();
+    // recipeSection.current?.scrollIntoView({ behavior: "smooth" });
+
+    const yCoord = recipeSection.current
+      ? // `recipeSection.current.getBoundingClientRect().top` is the document top
+        // `window.scrollY` is the window scoll
+        recipeSection.current.getBoundingClientRect().top + window.scrollY
+      : 0;
+    window.scroll({
+      top: yCoord,
+      behavior: "smooth",
+    });
   }, [recipeResult]);
   return (
     <main>
