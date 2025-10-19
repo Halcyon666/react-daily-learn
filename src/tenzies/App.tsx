@@ -24,7 +24,11 @@ const App: React.FC = () => {
 
   const diceElements = dice.map((diceProp) => (
     // becarefull passvalue do not pass all object,instead of spread all of it.
-    <Die key={diceProp.id} changeToHeld={changeToHeld} die={diceProp} />
+    <Die
+      key={diceProp.id}
+      changeToHeld={() => changeToHeld(diceProp.id)}
+      die={diceProp}
+    />
   ));
 
   const rollDice = () => {
