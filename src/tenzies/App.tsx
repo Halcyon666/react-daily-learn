@@ -41,11 +41,15 @@ const App: React.FC = () => {
   ));
 
   const rollDice = () => {
-    setDice((prevDice) =>
-      prevDice.map((die) =>
-        die.isHeld ? die : { ...die, value: getRandomValue1To6() }
-      )
-    );
+    if (!gameWon) {
+      setDice((prevDice) =>
+        prevDice.map((die) =>
+          die.isHeld ? die : { ...die, value: getRandomValue1To6() }
+        )
+      );
+    } else {
+      setDice(generateDice());
+    }
   };
 
   return (
