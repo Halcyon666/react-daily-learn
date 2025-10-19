@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 import Die from "./Die";
 import { nanoid } from "nanoid/non-secure";
+import ReactConfetti from "react-confetti";
 
 export interface DiceProp {
   value: number;
@@ -49,6 +50,7 @@ const App: React.FC = () => {
 
   return (
     <main>
+      {gameWon && <ReactConfetti />}
       <h1 className="title">Tenzies</h1>
       <p className="instructions">
         Roll until all dice are the same. Click each die to freeze it at its
