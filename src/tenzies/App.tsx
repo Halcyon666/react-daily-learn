@@ -10,20 +10,23 @@ export interface DiceProp {
 }
 
 const App: React.FC = () => {
+  const getRandomValue1To6 = () => Math.ceil(Math.random() * 6);
   const generateDice = () =>
     Array.from({ length: 10 }, () => ({
-      value: Math.ceil(Math.random() * 6),
+      value: getRandomValue1To6(),
       isHeld: false,
       id: nanoid(),
     }));
   const [dice, setDice] = useState<DiceProp[]>(generateDice());
   const changeToHeld = (id: string) =>
     setDice((prevDice) =>
-      prevDice.map((die) => (die.id === id ? { ...die, isHeld: true } : die))
+      prevDice.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die
+      )
     );
 
   const diceElements = dice.map((diceProp) => (
-    // becarefull passvalue do not pass all object,instead of spread all of it.
+    // be careful passvalue do not pass all object,instead of spread all of it.
     <Die
       key={diceProp.id}
       changeToHeld={() => changeToHeld(diceProp.id)}
@@ -32,7 +35,11 @@ const App: React.FC = () => {
   ));
 
   const rollDice = () => {
-    setDice(generateDice());
+    setDice((prevDice) =>
+      prevDice.map((die) =>
+        die.isHeld ? die : { ...die, value: getRandomValue1To6() }
+      )
+    );
   };
 
   return (
