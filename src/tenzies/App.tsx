@@ -12,13 +12,15 @@ export interface DiceProp {
 
 const App: React.FC = () => {
   const getRandomValue1To6 = () => Math.ceil(Math.random() * 6);
-  const generateDice = () =>
-    Array.from({ length: 10 }, () => ({
+  const generateDice = (): DiceProp[] => {
+    console.log("generateDice");
+    return Array.from({ length: 10 }, () => ({
       value: getRandomValue1To6(),
       isHeld: false,
       id: nanoid(),
     }));
-  const [dice, setDice] = useState<DiceProp[]>(generateDice());
+  };
+  const [dice, setDice] = useState<DiceProp[]>(() => generateDice());
 
   const gameWon =
     dice.every((die) => die.isHeld) &&
