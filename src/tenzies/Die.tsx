@@ -11,7 +11,12 @@ const Die: React.FC<{ die: DiceProp; changeToHeld: () => void }> = ({
 }) => {
   const { value, isHeld } = die;
   return (
-    <button className={isHeld ? "held" : "notHeld"} onClick={changeToHeld}>
+    <button
+      className={isHeld ? "held" : "notHeld"}
+      aria-pressed={isHeld}
+      aria-label={`Die with value ${value}, ${isHeld ? "held" : "not held"}`}
+      onClick={changeToHeld}
+    >
       {value}
     </button>
   );
