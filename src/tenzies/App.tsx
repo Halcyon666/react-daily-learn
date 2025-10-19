@@ -18,6 +18,11 @@ const App: React.FC = () => {
       id: nanoid(),
     }));
   const [dice, setDice] = useState<DiceProp[]>(generateDice());
+
+  const gameWon =
+    dice.every((die) => die.isHeld) &&
+    dice.every((die) => dice[0].value === die.value);
+
   const changeToHeld = (id: string) =>
     setDice((prevDice) =>
       prevDice.map((die) =>
@@ -44,9 +49,14 @@ const App: React.FC = () => {
 
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+      <p className="instructions">
+        Roll until all dice are the same. Click each die to freeze it at its
+        current value between rolls.
+      </p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-button" onClick={rollDice}>
-        Roll
+        {gameWon ? "New Game" : "Roll"}
       </button>
     </main>
   );
