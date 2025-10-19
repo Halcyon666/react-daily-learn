@@ -13,7 +13,7 @@ const App: React.FC = () => {
   const generateDice = () =>
     Array.from({ length: 10 }, () => ({
       value: Math.ceil(Math.random() * 6),
-      isHeld: false,
+      isHeld: true,
       id: nanoid(),
     }));
   const [dice, setDice] = useState<DiceProp[]>(generateDice());
@@ -29,7 +29,9 @@ const App: React.FC = () => {
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
-      <button onClick={rollDice}>Roll</button>
+      <button className="roll-button" onClick={rollDice}>
+        Roll
+      </button>
     </main>
   );
 };
