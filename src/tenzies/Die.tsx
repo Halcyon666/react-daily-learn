@@ -1,4 +1,6 @@
-const Die: React.FC<{ value: number }> = ({ value }) => {
+import type { DiceProp } from "./App";
+
+const Die: React.FC<DiceProp> = ({ value, isHeld }) => {
   return <button className="die">{value}</button>;
 };
 

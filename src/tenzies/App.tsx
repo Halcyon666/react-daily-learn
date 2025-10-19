@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import "./index.css";
 import Die from "./Die";
+import { nanoid } from "nanoid/non-secure";
+
+export interface DiceProp {
+  value: number;
+  isHeld: boolean;
+  id: string;
+}
 
 const App: React.FC = () => {
   const generateDice = () =>
-    Array.from({ length: 10 }, () => Math.ceil(Math.random() * 6));
-  const [dice, setDice] = useState<number[]>(generateDice());
+    Array.from({ length: 10 }, () => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    }));
+  const [dice, setDice] = useState<DiceProp[]>(generateDice());
 
-  const diceElements = dice.map((value, key) => (
-    <Die key={key} value={value} />
+  const diceElements = dice.map((diceProp) => (
+    // becarefull passvalue do not pass all object,instead of spread all of it.
+    <Die key={diceProp.id} {...diceProp} />
   ));
 
   const rollDice = () => {
@@ -17,7 +29,7 @@ const App: React.FC = () => {
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
-      <button onClick={rollDice}>Roll Dice</button>
+      <button onClick={rollDice}>Roll</button>
     </main>
   );
 };
