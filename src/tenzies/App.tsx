@@ -13,19 +13,24 @@ const App: React.FC = () => {
   const generateDice = () =>
     Array.from({ length: 10 }, () => ({
       value: Math.ceil(Math.random() * 6),
-      isHeld: true,
+      isHeld: false,
       id: nanoid(),
     }));
   const [dice, setDice] = useState<DiceProp[]>(generateDice());
+  const changeToHeld = (id: string) =>
+    setDice((prevDice) =>
+      prevDice.map((die) => (die.id === id ? { ...die, isHeld: true } : die))
+    );
 
   const diceElements = dice.map((diceProp) => (
     // becarefull passvalue do not pass all object,instead of spread all of it.
-    <Die key={diceProp.id} {...diceProp} />
+    <Die key={diceProp.id} changeToHeld={changeToHeld} die={diceProp} />
   ));
 
   const rollDice = () => {
     setDice(generateDice());
   };
+
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
