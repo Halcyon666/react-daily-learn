@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
 import Die from "./Die";
 import { nanoid } from "nanoid/non-secure";
@@ -53,6 +53,13 @@ const App: React.FC = () => {
       setDice(generateDice());
     }
   };
+  // 注意要添加操作的元素类型
+  const buttonDiceRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (gameWon) {
+      buttonDiceRef.current?.focus();
+    }
+  }, [gameWon]);
 
   return (
     <main>
@@ -68,7 +75,7 @@ const App: React.FC = () => {
         current value between rolls.
       </p>
       <div className="dice-container">{diceElements}</div>
-      <button className="roll-button" onClick={rollDice}>
+      <button ref={buttonDiceRef} className="roll-button" onClick={rollDice}>
         {gameWon ? "New Game" : "Roll"}
       </button>
     </main>
