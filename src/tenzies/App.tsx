@@ -88,7 +88,7 @@ const App: React.FC = () => {
       <button ref={buttonDiceRef} className="roll-button" onClick={rollDice}>
         {gameWon ? "New Game" : "Roll"}
       </button>
-      <div className="total-seconds-div"> {`已经使用${totalTime}s`} </div>
+      <div className="total-seconds-div"> {`times up to ${totalTime}s`} </div>
     </main>
   );
 };
