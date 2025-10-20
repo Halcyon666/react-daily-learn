@@ -68,7 +68,7 @@ const App: React.FC = () => {
     const interval = setInterval(() => {
       setTotalTime((prev) => prev + 1);
     }, 1000);
-    return clearInterval(interval);
+    return () => clearInterval(interval);
   }, [gameWon]);
 
   return (
