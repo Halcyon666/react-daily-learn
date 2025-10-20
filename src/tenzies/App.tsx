@@ -51,6 +51,7 @@ const App: React.FC = () => {
       );
     } else {
       setDice(generateDice());
+      setTotalTime(0);
     }
   };
   // 注意要添加操作的元素类型
@@ -59,6 +60,15 @@ const App: React.FC = () => {
     if (gameWon) {
       buttonDiceRef.current?.focus();
     }
+  }, [gameWon]);
+  const [totalTime, setTotalTime] = useState<number>(0);
+
+  useEffect(() => {
+    if (gameWon) return;
+    const interval = setInterval(() => {
+      setTotalTime((prev) => prev + 1);
+    }, 1000);
+    return clearInterval(interval);
   }, [gameWon]);
 
   return (
@@ -78,6 +88,7 @@ const App: React.FC = () => {
       <button ref={buttonDiceRef} className="roll-button" onClick={rollDice}>
         {gameWon ? "New Game" : "Roll"}
       </button>
+      <div className="total-seconds-div"> {`已经使用${totalTime}s`} </div>
     </main>
   );
 };

@@ -51,7 +51,7 @@ main {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .dice-container button {
@@ -105,4 +105,12 @@ button {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+.total-seconds-div {
+    /* width: auto; */
+    background-color: #59E391;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: none;
 }
