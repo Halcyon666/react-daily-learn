@@ -46,5 +46,19 @@ section.game-status>h2 {
 
 section.game-status>p {
     margin: 5px;
+}
 
+section.language-chips {
+    display: flex;
+    /* make languages wrap */
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    /* this center all content following header > p */
+    max-width: 350px;
+}
+
+span.chip {
+    border-radius: 3px;
+    padding: 4.5px;
 }

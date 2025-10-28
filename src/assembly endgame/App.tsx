@@ -1,4 +1,5 @@
 import "./index.css";
+import { languages } from "./languages";
 
 export default function AssemblyEndgame() {
   return (
@@ -13,6 +14,20 @@ export default function AssemblyEndgame() {
       <section className="game-status">
         <h2>You win!</h2>
         <p>Well done! 🎉</p>
+      </section>
+      <section className="language-chips">
+        {languages.map((language) => (
+          <span
+            key={language.name}
+            className="chip"
+            style={{
+              backgroundColor: language.backgroundColor,
+              color: language.color,
+            }}
+          >
+            {language.name}
+          </span>
+        ))}
       </section>
     </main>
   );
