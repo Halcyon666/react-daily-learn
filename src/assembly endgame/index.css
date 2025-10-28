@@ -13,15 +13,18 @@ body {
     justify-content: center;
 }
 
+header {
+    text-align: center;
+}
+
 header>h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #F9F4DA;
 }
 
 header>p {
-    text-wrap: wrap;
+    font-size: 0.875rem;
     max-width: 350px;
-    text-align: center;
-    color: gray;
+    color: #8e8e8e;
 }
