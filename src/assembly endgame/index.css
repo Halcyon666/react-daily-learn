@@ -28,3 +28,21 @@ header>p {
     max-width: 350px;
     color: #8e8e8e;
 }
+
+.game-status {
+    border-radius: 6px;
+    width: 350px;
+    text-align: center;
+    background-color: green;
+    height: 80px;
+}
+
+.game-status>h2 {
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+
+.game-status>p {
+    margin-top: 0;
+}
