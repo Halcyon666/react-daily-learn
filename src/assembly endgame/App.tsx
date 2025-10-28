@@ -1,7 +1,13 @@
+import { useState } from "react";
 import "./index.css";
 import { languages } from "./languages";
 
 export default function AssemblyEndgame() {
+  const [currentWord, setCurrentWord] = useState("react");
+  const currentWordElements = currentWord.split("").map((character, index) => (
+    // no change the array so use index directly
+    <span key={index}>{character.toUpperCase()}</span>
+  ));
   return (
     <main>
       <header>
@@ -29,6 +35,7 @@ export default function AssemblyEndgame() {
           </span>
         ))}
       </section>
+      <section className="word">{currentWordElements}</section>
     </main>
   );
 }
