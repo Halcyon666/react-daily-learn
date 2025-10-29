@@ -9,97 +9,115 @@ body {
     color: #D9D9D9;
     padding: 20px;
     height: 100vh;
+
     display: flex;
     justify-content: center;
+    align-items: center;
+    /* ✅ 垂直水平居中整个游戏内容 */
 }
 
-header {
-    text-align: center;
-}
-
-header>h1 {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #F9F4DA;
-}
-
-header>p {
-    font-size: 0.875rem;
-    max-width: 350px;
-    color: #8e8e8e;
-}
-
-section.game-status {
-    background-color: #10A95B;
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 4px;
-    margin-block: 30px;
+    text-align: center;
+    /* ✅ 让多行文字居中 */
+    gap: 20px;
+    max-width: 700px;
 }
 
-section.game-status>h2 {
-    font-size: 1.25rem;
-    margin: 5px;
+/* ---------- Header ---------- */
+header h1 {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 8px;
 }
 
-
-section.game-status>p {
-    margin: 5px;
+header p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
+/* ---------- Game status ---------- */
+section.game-status {
+    background-color: #00b16a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+section.game-status h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+section.game-status p {
+    margin: 4px 0 0;
+}
+
+/* ---------- Language chips ---------- */
 section.language-chips {
     display: flex;
-    /* make languages wrap */
     flex-wrap: wrap;
-    gap: 5px;
     justify-content: center;
-    /* this center all content following header > p */
-    max-width: 350px;
-    margin-bottom: 36px;
+    gap: 6px;
+    max-width: 400px;
+    /* ✅ 让换行后依然整体居中 */
+    margin-bottom: 16px;
 }
 
-span.chip {
-    border-radius: 3px;
-    padding: 4.5px;
+section.language-chips .chip {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 600;
 }
 
+/* ---------- Word section ---------- */
 section.word {
     display: flex;
     justify-content: center;
-    gap: 2px;
-
+    gap: 10px;
 }
 
-section.word>span {
-    height: 40px;
-    width: 40px;
-    background-color: #323232;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: 1.125rem;
-    border-bottom: 1px solid #F9F4Da;
-    margin-bottom: 40px;
+section.word span {
+    font-size: 1.4rem;
+    color: #fff;
+    border-bottom: 2px solid #555;
+    min-width: 24px;
+    text-align: center;
 }
 
+/* ---------- Keyboard ---------- */
 section.keyboard {
     display: flex;
-    justify-content: center;
-    color: black;
     flex-wrap: wrap;
-    max-width: 350px;
-    gap: 7px;
-
-
+    justify-content: center;
+    gap: 8px;
+    max-width: 450px;
 }
 
-section.keyboard>span {
-    width: 40px;
-    height: 40px;
-    background-color: #fcaf25;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+section.keyboard button {
+    background-color: #ffb800;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+section.keyboard button:hover {
+    transform: scale(1.1);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    main {
+        transform: scale(0.9);
+    }
 }

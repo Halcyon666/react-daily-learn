@@ -39,7 +39,7 @@ export default function AssemblyEndgame() {
       <section className="word">{currentWordElements}</section>
       <section className="keyboard">
         {alphabet.split("").map((character) => (
-          <span>{character}</span>
+          <button key={character}>{character.toUpperCase()}</button>
         ))}
       </section>
     </main>
