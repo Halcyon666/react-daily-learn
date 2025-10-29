@@ -80,4 +80,26 @@ section.word>span {
     align-items: center;
     font: 1.125rem;
     border-bottom: 1px solid #F9F4Da;
+    margin-bottom: 40px;
+}
+
+section.keyboard {
+    display: flex;
+    justify-content: center;
+    color: black;
+    flex-wrap: wrap;
+    max-width: 350px;
+    gap: 7px;
+
+
+}
+
+section.keyboard>span {
+    width: 40px;
+    height: 40px;
+    background-color: #fcaf25;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

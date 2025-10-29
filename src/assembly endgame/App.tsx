@@ -8,6 +8,7 @@ export default function AssemblyEndgame() {
     // no change the array so use index directly
     <span key={index}>{character.toUpperCase()}</span>
   ));
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
   return (
     <main>
       <header>
@@ -36,6 +37,11 @@ export default function AssemblyEndgame() {
         ))}
       </section>
       <section className="word">{currentWordElements}</section>
+      <section className="keyboard">
+        {alphabet.split("").map((character) => (
+          <span>{character}</span>
+        ))}
+      </section>
     </main>
   );
 }
