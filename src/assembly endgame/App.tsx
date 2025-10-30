@@ -63,7 +63,7 @@ export default function AssemblyEndgame() {
       <section className="word">{currentWordElements}</section>
       <div>
         <section className="keyboard">{keyboardElements(alphabet)}</section>
-        <section className="keyboard" id="keyboard2">
+        <section className="keyboard less-gap">
           {keyboardElements(alphabet1)}
         </section>
       </div>

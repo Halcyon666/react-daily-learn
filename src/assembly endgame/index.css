@@ -17,35 +17,34 @@ body {
 }
 
 main {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     /* ✅ 让多行文字居中 */
     gap: 20px;
-    max-width: 700px;
 }
 
 /* ---------- Header ---------- */
 header h1 {
     font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 8px;
+    color: #F9F4DA;
 }
 
 header p {
     font-size: 0.95rem;
     line-height: 1.4;
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 350px;
+    color: #8E8E8E;
 }
 
 /* ---------- Game status ---------- */
 section.game-status {
-    background-color: #00b16a;
+    background-color: #10A95B;
     color: white;
     padding: 12px 20px;
-    border-radius: 10px;
+    border-radius: 4px;
     width: fit-content;
 }
 
@@ -78,14 +77,13 @@ section.language-chips .chip {
 /* ---------- Word section ---------- */
 section.word {
     display: flex;
-    justify-content: center;
     gap: 10px;
 }
 
 section.word span {
     font-size: 1.4rem;
-    color: #fff;
-    border-bottom: 2px solid #555;
+    background-color: #323232;
+    border-bottom: 1px solid #F9F4DA;
     min-width: 24px;
     text-align: center;
 }
@@ -100,7 +98,8 @@ section.keyboard {
 }
 
 section.keyboard button {
-    background-color: #ffb800;
+    background-color: #FCBA29;
+    border: 1px solid #D7D7D7;
     color: #000;
     border-radius: 4px;
     width: 36px;
@@ -108,7 +107,6 @@ section.keyboard button {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.1s ease-in-out;
-    border: 1px solid #D7D7D7;
 }
 
 section.keyboard button:hover {
@@ -116,7 +114,7 @@ section.keyboard button:hover {
 }
 
 
-#keyboard2 {
+.keyboard.less-gap {
     padding: 8px;
 }
 
@@ -136,6 +134,7 @@ button.new-game {
     height: 40px;
     color: black;
     font-weight: bold;
+    font-size: 1.1rem;
     cursor: pointer;
     border-radius: 4px;
 }
