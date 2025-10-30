@@ -138,3 +138,11 @@ button.new-game {
     cursor: pointer;
     border-radius: 4px;
 }
+
+.keyboard.green-background {
+    background-color: #10A95B;
+}
+
+.keyboard.red-background {
+    background-color: red;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import { languages } from "./languages";
+import clsx from "clsx";
 
 export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState("react");
@@ -13,11 +14,27 @@ export default function AssemblyEndgame() {
   const alphabet1 = "zxcvbnm";
 
   const keyboardElements = (alphabet: string) => {
-    return alphabet.split("").map((character) => (
-      <button key={character} onClick={() => keyboardClick(character)}>
-        {character.toUpperCase()}
-      </button>
-    ));
+    return alphabet.split("").map((character) => {
+      // use two array get derived status, after clicking page will be rendered!
+      const isGuessed = guessedLetters.includes(character);
+      const hasCurrentWord = currentWord.includes(character);
+      const isRight = isGuessed && hasCurrentWord;
+      const isWrong = isGuessed && !hasCurrentWord;
+
+      return (
+        <button
+          className={clsx(
+            "keyboard",
+            isRight && "green-background",
+            isWrong && "red-background"
+          )}
+          key={character}
+          onClick={() => keyboardClick(character)}
+        >
+          {character.toUpperCase()}
+        </button>
+      );
+    });
   };
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
