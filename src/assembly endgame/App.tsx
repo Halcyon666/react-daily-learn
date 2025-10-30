@@ -8,13 +8,21 @@ export default function AssemblyEndgame() {
     // no change the array so use index directly
     <span key={index}>{character.toUpperCase()}</span>
   ));
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const alphabet = "qwertyuiopasdfghjkl";
+
+  const alphabet1 = "zxcvbnm";
+
+  const keyboardElements = (alphabet: string) => {
+    return alphabet.split("").map((character) => (
+      <button key={character} onClick={() => keyboardClick(character)}>
+        {character.toUpperCase()}
+      </button>
+    ));
+  };
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
-  console.log("Render");
   const keyboardClick = (letter: string) => {
-    console.log("Clicked:", letter);
     setGuessedLetters((prevLetters) =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
     );
@@ -24,6 +32,7 @@ export default function AssemblyEndgame() {
     //   return Array.from(set);
     // });
   };
+
   return (
     <main>
       <header>
@@ -52,13 +61,13 @@ export default function AssemblyEndgame() {
         ))}
       </section>
       <section className="word">{currentWordElements}</section>
-      <section className="keyboard">
-        {alphabet.split("").map((character) => (
-          <button key={character} onClick={() => keyboardClick(character)}>
-            {character.toUpperCase()}
-          </button>
-        ))}
-      </section>
+      <div>
+        <section className="keyboard">{keyboardElements(alphabet)}</section>
+        <section className="keyboard" id="keyboard2">
+          {keyboardElements(alphabet1)}
+        </section>
+      </div>
+
       <button className="new-game">New Game</button>
     </main>
   );
