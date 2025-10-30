@@ -9,6 +9,21 @@ export default function AssemblyEndgame() {
     <span key={index}>{character.toUpperCase()}</span>
   ));
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+
+  console.log("Render");
+  const keyboardClick = (letter: string) => {
+    console.log("Clicked:", letter);
+    setGuessedLetters((prevLetters) =>
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+    );
+    // setGuessedLetters((prevLetters) => {
+    //   const set = new Set(prevLetters);
+    //   set.add(letter);
+    //   return Array.from(set);
+    // });
+  };
   return (
     <main>
       <header>
@@ -39,9 +54,12 @@ export default function AssemblyEndgame() {
       <section className="word">{currentWordElements}</section>
       <section className="keyboard">
         {alphabet.split("").map((character) => (
-          <button key={character}>{character.toUpperCase()}</button>
+          <button key={character} onClick={() => keyboardClick(character)}>
+            {character.toUpperCase()}
+          </button>
         ))}
       </section>
+      <button className="new-game">New Game</button>
     </main>
   );
 }
