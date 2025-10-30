@@ -139,10 +139,10 @@ button.new-game {
     border-radius: 4px;
 }
 
-.keyboard.green-background {
+section.keyboard>button.green-background {
     background-color: #10A95B;
 }
 
-.keyboard.red-background {
-    background-color: red;
+section.keyboard>button.red-background {
+    background-color: #EC5D49;
 }

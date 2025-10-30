@@ -23,11 +23,10 @@ export default function AssemblyEndgame() {
 
       return (
         <button
-          className={clsx(
-            "keyboard",
-            isRight && "green-background",
-            isWrong && "red-background"
-          )}
+          className={clsx({
+            "green-background": isRight,
+            "red-background": isWrong,
+          })}
           key={character}
           onClick={() => keyboardClick(character)}
         >
