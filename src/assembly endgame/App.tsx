@@ -5,7 +5,10 @@ import clsx from "clsx";
 
 export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState("react");
-
+  const currentWordElements = currentWord.split("").map((character, index) => (
+    // no change the array so use index directly
+    <span key={index}>{character.toUpperCase()}</span>
+  ));
   const alphabet = "qwertyuiopasdfghjkl";
 
   const alphabet1 = "zxcvbnm";
@@ -33,16 +36,7 @@ export default function AssemblyEndgame() {
     });
   };
 
-  const arr = Array(currentWord.length).fill("");
-  // const arr = Array.from({ length: currentWord.length }, () => "");
-  const [guessedLetters, setGuessedLetters] = useState<string[]>(arr);
-  const currentWordElements = guessedLetters.map(
-    (character, index) =>
-      // no change the array so use index directly
-      currentWord.includes(character) && (
-        <span key={index}>{character.toUpperCase()}</span>
-      )
-  );
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const keyboardClick = (letter: string) => {
     setGuessedLetters((prevLetters) =>
