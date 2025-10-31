@@ -85,6 +85,7 @@ section.word span {
     background-color: #323232;
     border-bottom: 1px solid #F9F4DA;
     min-width: 24px;
+    min-height: 26.4px;
     text-align: center;
 }
 

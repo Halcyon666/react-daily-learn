@@ -5,9 +5,20 @@ import clsx from "clsx";
 
 export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState("react");
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+
   const currentWordElements = currentWord.split("").map((character, index) => (
     // no change the array so use index directly
-    <span key={index}>{character.toUpperCase()}</span>
+    <span key={index}>
+      {/* fixed length position and prefill, no append, It is smart.
+      R --- guessedLetters includes ? ture display R, otherwise ""
+      E --- see above
+      A --- see above
+      C --- see above
+      T --- see above
+      */}
+      {guessedLetters.includes(character) ? character.toUpperCase() : ""}
+    </span>
   ));
   const alphabet = "qwertyuiopasdfghjkl";
 
@@ -35,8 +46,6 @@ export default function AssemblyEndgame() {
       );
     });
   };
-
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const keyboardClick = (letter: string) => {
     setGuessedLetters((prevLetters) =>
