@@ -65,6 +65,25 @@ export default function AssemblyEndgame() {
     // });
   };
 
+  const languageElements = languages.map((language, index) => {
+    const isLost = index < wrongGuessesArr.length;
+    const className = clsx("chip", { lost: isLost });
+    // const className = clsx("chip", isLost && "lost");
+    return (
+      <span
+        key={language.name}
+        // className={`chip ${isLost ? "lost" : ""}`}
+        className={className}
+        style={{
+          backgroundColor: language.backgroundColor,
+          color: language.color,
+        }}
+      >
+        {language.name}
+      </span>
+    );
+  });
+
   return (
     <main>
       <header>
@@ -78,20 +97,7 @@ export default function AssemblyEndgame() {
         <h2>You win!</h2>
         <p>Well done! 🎉</p>
       </section>
-      <section className="language-chips">
-        {languages.map((language) => (
-          <span
-            key={language.name}
-            className="chip lost"
-            style={{
-              backgroundColor: language.backgroundColor,
-              color: language.color,
-            }}
-          >
-            {language.name}
-          </span>
-        ))}
-      </section>
+      <section className="language-chips">{languageElements}</section>
       <section className="word">{currentWordElements}</section>
       <div>
         <section className="keyboard">{keyboardElements(alphabet)}</section>
