@@ -4,8 +4,18 @@ import { languages } from "./languages";
 import clsx from "clsx";
 
 export default function AssemblyEndgame() {
+  // state values
   const [currentWord, setCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+
+  // drived valuse
+  const wrongGuessesArr = guessedLetters.filter(
+    (c) => !currentWord.includes(c)
+  );
+
+  // static valuse
+  const alphabet = "qwertyuiopasdfghjkl";
+  const alphabet1 = "zxcvbnm";
 
   const currentWordElements = currentWord.split("").map((character, index) => (
     // no change the array so use index directly
@@ -20,9 +30,6 @@ export default function AssemblyEndgame() {
       {guessedLetters.includes(character) ? character.toUpperCase() : ""}
     </span>
   ));
-  const alphabet = "qwertyuiopasdfghjkl";
-
-  const alphabet1 = "zxcvbnm";
 
   const keyboardElements = (alphabet: string) => {
     return alphabet.split("").map((character) => {
