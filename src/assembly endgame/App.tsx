@@ -82,7 +82,7 @@ export default function AssemblyEndgame() {
         {languages.map((language) => (
           <span
             key={language.name}
-            className="chip"
+            className="chip lost"
             style={{
               backgroundColor: language.backgroundColor,
               color: language.color,

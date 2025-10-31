@@ -74,6 +74,21 @@ section.language-chips .chip {
     font-weight: 600;
 }
 
+/* Dimmed overlay with skull on "lost" languages */
+section.language-chips .chip.lost::before {
+    content: "💀";
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 0.85rem;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 /* ---------- Word section ---------- */
 section.word {
     display: flex;
@@ -119,6 +134,14 @@ section.keyboard button:hover {
     padding: 8px;
 }
 
+section.keyboard>button.green-background {
+    background-color: #10A95B;
+}
+
+section.keyboard>button.red-background {
+    background-color: #EC5D49;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
     main {
@@ -138,12 +161,4 @@ button.new-game {
     font-size: 1.1rem;
     cursor: pointer;
     border-radius: 4px;
-}
-
-section.keyboard>button.green-background {
-    background-color: #10A95B;
-}
-
-section.keyboard>button.red-background {
-    background-color: #EC5D49;
 }
