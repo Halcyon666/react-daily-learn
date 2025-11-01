@@ -89,6 +89,17 @@ export default function AssemblyEndgame() {
     );
   });
 
+  const gameStatusElement = isGameWon ? (
+    <>
+      <h2>You win!</h2>
+      <p>Well done! 🎉</p>
+    </>
+  ) : isGameLost ? (
+    <>
+      <h2>Game Over!</h2>
+      <p>You lose! Better start learning Assembly 😭</p>
+    </>
+  ) : null;
   return (
     <main>
       <header>
@@ -104,17 +115,7 @@ export default function AssemblyEndgame() {
           "game-lost": isGameLost,
         })}
       >
-        {isGameWon ? (
-          <>
-            <h2>You win!</h2>
-            <p>Well done! 🎉</p>
-          </>
-        ) : isGameLost ? (
-          <>
-            <h2>Game Over!</h2>
-            <p>You lose! Better start learning Assembly 😭</p>
-          </>
-        ) : null}
+        {gameStatusElement}
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{currentWordElements}</section>
