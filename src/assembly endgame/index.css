@@ -41,7 +41,6 @@ header p {
 
 /* ---------- Game status ---------- */
 section.game-status {
-    background-color: #10A95B;
     color: white;
     padding: 12px 20px;
     border-radius: 4px;
@@ -55,6 +54,14 @@ section.game-status h2 {
 
 section.game-status p {
     margin: 4px 0 0;
+}
+
+.game-lost {
+    background-color: #BA2A2A;
+}
+
+.game-won {
+    background-color: #10A95B;
 }
 
 /* ---------- Language chips ---------- */

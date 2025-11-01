@@ -98,9 +98,23 @@ export default function AssemblyEndgame() {
           from Assembly!
         </p>
       </header>
-      <section className="game-status">
-        <h2>You win!</h2>
-        <p>Well done! 🎉</p>
+      <section
+        className={clsx("game-status", {
+          "game-won": isGameWon,
+          "game-lost": isGameLost,
+        })}
+      >
+        {isGameWon ? (
+          <>
+            <h2>You win!</h2>
+            <p>Well done! 🎉</p>
+          </>
+        ) : isGameLost ? (
+          <>
+            <h2>Game Over!</h2>
+            <p>You lose! Better start learning Assembly 😭</p>
+          </>
+        ) : null}
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{currentWordElements}</section>
