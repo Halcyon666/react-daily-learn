@@ -39,7 +39,9 @@ section.game-status {
     color: white;
     padding: 12px 20px;
     border-radius: 4px;
-    width: fit-content;
+    max-width: 350px;
+    /* expand this section status */
+    width: 100%;
 }
 
 section.game-status h2 {
