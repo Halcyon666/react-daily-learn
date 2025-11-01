@@ -8,10 +8,15 @@ export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = useState("react");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
-  // drived valuse
+  // drived values
   const wrongGuessesArr = guessedLetters.filter(
     (c) => !currentWord.includes(c)
   );
+  const isGameLost = wrongGuessesArr.length >= languages.length - 1;
+  const isGameWon = currentWord
+    .split("")
+    .every((c) => guessedLetters.includes(c));
+  const isGameOver = isGameLost || isGameWon;
 
   // static valuse
   const alphabet = "qwertyuiopasdfghjkl";
@@ -106,7 +111,7 @@ export default function AssemblyEndgame() {
         </section>
       </div>
 
-      <button className="new-game">New Game</button>
+      {isGameOver && <button className="new-game">New Game</button>}
     </main>
   );
 }
