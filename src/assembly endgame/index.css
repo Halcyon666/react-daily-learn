@@ -53,6 +53,10 @@ section.game-status p {
     margin: 4px 0 0;
 }
 
+section.game-status.hint {
+    background-color: plum;
+}
+
 .game-lost {
     background-color: #BA2A2A;
 }
