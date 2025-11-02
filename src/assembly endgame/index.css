@@ -61,6 +61,10 @@ section.game-status p {
     background-color: #10A95B;
 }
 
+.game-farewell {
+    background-color: #7A5EA7;
+}
+
 /* ---------- Language chips ---------- */
 section.language-chips {
     display: flex;
