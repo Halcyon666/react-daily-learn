@@ -50,6 +50,7 @@ export default function AssemblyEndgame() {
 
       return (
         <button
+          disabled={isGameOver}
           className={clsx({
             "green-background": isRight,
             "red-background": isWrong,
