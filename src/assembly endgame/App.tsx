@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./index.css";
 import { languages } from "./languages";
 import clsx from "clsx";
-import { getFarewellText } from "./Utils.js";
 
 export default function AssemblyEndgame() {
   // state values
@@ -100,11 +99,7 @@ export default function AssemblyEndgame() {
       <h2>Game Over!</h2>
       <p>You lose! Better start learning Assembly 😭</p>
     </>
-  ) : wrongGuessesArr.length === 0 ? (
-    ""
-  ) : (
-    getFarewellText(languages[wrongGuessesArr.length - 1].name)
-  );
+  ) : null;
   return (
     <main>
       <header>
@@ -118,7 +113,6 @@ export default function AssemblyEndgame() {
         className={clsx("game-status", {
           "game-won": isGameWon,
           "game-lost": isGameLost,
-          hint: !isGameOver && wrongGuessesArr.length > 0,
         })}
       >
         {gameStatusElement}
