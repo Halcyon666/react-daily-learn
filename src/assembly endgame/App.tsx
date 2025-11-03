@@ -18,9 +18,9 @@ export default function AssemblyEndgame() {
     .split("")
     .every((c) => guessedLetters.includes(c));
   const isGameOver = isGameLost || isGameWon;
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
   const lastLetterWrong =
-    guessedLetters.length > 0 &&
-    !currentWord.includes(guessedLetters[guessedLetters.length - 1]);
+    guessedLetters.length > 0 && !currentWord.includes(lastGuessedLetter);
 
   // static valuse
   const alphabet = "qwertyuiopasdfghjkl";
@@ -133,6 +133,13 @@ export default function AssemblyEndgame() {
       <section className="language-chips">{languageElements}</section>
       <section className="word">{currentWordElements}</section>
       <section className="src-only" aria-live="polite" role="status">
+        <p>
+          {currentWord.includes(lastGuessedLetter)
+            ? `Correct! The letter ${lastGuessedLetter} is in the word.`
+            : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
+          You have {languages.length - 1 - wrongGuessesArr.length} attempts
+          left.
+        </p>
         <p>
           Current word:{" "}
           {currentWord
