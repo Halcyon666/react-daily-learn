@@ -2,11 +2,12 @@ import { useState } from "react";
 import "./index.css";
 import { languages } from "./languages";
 import clsx from "clsx";
-import { getFarewellText } from "./utils.js";
+import { getFarewellText, chooseAWord } from "./utils.js";
+import ReactConfetti from "react-confetti";
 
 export default function AssemblyEndgame() {
   // state values
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(() => chooseAWord());
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   // drived values
@@ -16,7 +17,7 @@ export default function AssemblyEndgame() {
   const isGameLost = wrongGuessesArr.length >= languages.length - 1;
   const isGameWon = currentWord
     .split("")
-    .every((c) => guessedLetters.includes(c));
+    .every((c: string) => guessedLetters.includes(c));
   const isGameOver = isGameLost || isGameWon;
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
   const lastLetterWrong =
@@ -26,19 +27,28 @@ export default function AssemblyEndgame() {
   const alphabet = "qwertyuiopasdfghjkl";
   const alphabet1 = "zxcvbnm";
 
-  const currentWordElements = currentWord.split("").map((character, index) => (
-    // no change the array so use index directly
-    <span key={index}>
-      {/* fixed length position and prefill, no append, It is smart.
+  const currentWordElements = currentWord
+    .split("")
+    .map((character: string, index: number) => (
+      // no change the array so use index directly
+      <span
+        key={index}
+        className={clsx({
+          "missed-letter": isGameLost && !guessedLetters.includes(character),
+        })}
+      >
+        {/* fixed length position and prefill, no append, It is smart.
       R --- guessedLetters includes ? ture display R, otherwise ""
       E --- see above
       A --- see above
       C --- see above
       T --- see above
       */}
-      {guessedLetters.includes(character) ? character.toUpperCase() : ""}
-    </span>
-  ));
+        {isGameLost || guessedLetters.includes(character)
+          ? character.toUpperCase()
+          : ""}
+      </span>
+    ));
 
   const keyboardElements = (alphabet: string) => {
     return alphabet.split("").map((character) => {
@@ -96,7 +106,6 @@ export default function AssemblyEndgame() {
     );
   });
 
-  console.log(guessedLetters.length - 1);
   const gameStatusElement = isGameWon ? (
     <>
       <h2>You win!</h2>
@@ -110,8 +119,15 @@ export default function AssemblyEndgame() {
   ) : lastLetterWrong ? (
     getFarewellText(languages[wrongGuessesArr.length - 1].name)
   ) : null;
+
+  const newGame = () => {
+    setGuessedLetters([]);
+    setCurrentWord(chooseAWord());
+  };
+
   return (
     <main>
+      {isGameWon && <ReactConfetti recycle={false} numberOfPieces={1000} />}
       <header>
         <h1>Assembly: ENdgame</h1>
         <p>
@@ -132,7 +148,7 @@ export default function AssemblyEndgame() {
       </section>
       <section className="language-chips">{languageElements}</section>
       <section className="word">{currentWordElements}</section>
-      <section className="src-only" aria-live="polite" role="status">
+      <section className="sr-only" aria-live="polite" role="status">
         <p>
           {currentWord.includes(lastGuessedLetter)
             ? `Correct! The letter ${lastGuessedLetter} is in the word.`
@@ -144,7 +160,7 @@ export default function AssemblyEndgame() {
           Current word:{" "}
           {currentWord
             .split("")
-            .map((letter) =>
+            .map((letter: string) =>
               guessedLetters.includes(letter) ? letter + "." : "blank."
             )
             .join(" ")}
@@ -157,7 +173,11 @@ export default function AssemblyEndgame() {
         </section>
       </div>
 
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && (
+        <button onClick={newGame} className="new-game">
+          New Game
+        </button>
+      )}
     </main>
   );
 }
