@@ -1,5 +1,6 @@
-import { Link, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { routes } from "./Routes";
+import GameLayout from "./GameLayout";
 
 export default function App() {
   return (
@@ -10,10 +11,7 @@ export default function App() {
           flexDirection: "column",
         }}
       >
-        <Link to="/">home</Link>
-        <Link to="/games">games</Link>
-        <Link to="/games/1">games id</Link>
-        <Link to="/games/search">games search</Link>
+        {<GameLayout />}
       </nav>
       {useRoutes(routes)}
     </>
