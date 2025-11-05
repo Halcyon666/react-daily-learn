@@ -5,11 +5,11 @@ export default function App() {
   const gamesSubRoute = useRoutes(routes);
   return (
     <div>
-      <Routes>
+      {/*       <Routes>
         <Route path="/" element={<h1>Another Home</h1>}>
           {" "}
         </Route>
-      </Routes>
+      </Routes> */}
       <nav>
         <ul>
           <li>
