@@ -1,6 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
+import type { GameInfo } from "./GameLayout";
 
 export default function GameItem() {
   const { id } = useParams();
-  return <h1>games {id}</h1>;
+  const { name } = useOutletContext<GameInfo>();
+  return (
+    <h1>
+      games {id} - {name}
+    </h1>
+  );
 }
