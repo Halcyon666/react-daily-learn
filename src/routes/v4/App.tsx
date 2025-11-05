@@ -1,19 +1,21 @@
-import { useRoutes } from "react-router-dom";
+import { Link, useRoutes } from "react-router-dom";
 import { routes } from "./Routes";
-import GameLayout from "./GameLayout";
 
 export default function App() {
+  const gamesSubRoute = useRoutes(routes);
   return (
     <>
-      <nav
-        style={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {<GameLayout />}
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">home</Link>
+          </li>
+          <li>
+            <Link to="/games">games</Link>
+          </li>
+        </ul>
       </nav>
-      {useRoutes(routes)}
+      {gamesSubRoute}
     </>
   );
 }
