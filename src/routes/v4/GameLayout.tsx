@@ -15,7 +15,7 @@ export default function GameLayout() {
       }}
     >
       <Link to="/games/1">games id</Link>
-      <Link to="/games/search">games search</Link>
+      <Link to="/games/description">games description</Link>
       <Outlet context={pubg} />
     </nav>
   );
