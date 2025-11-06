@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useRoutes } from "react-router-dom";
+import { Link, useRoutes } from "react-router-dom";
 import { routes } from "./routes";
 
 export default function App() {

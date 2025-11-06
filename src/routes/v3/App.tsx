@@ -1,8 +1,8 @@
 import { Link, Route, Routes } from "react-router-dom";
-import Games from "./Games";
-import type { JSX } from "react";
-import GamesSearch from "./GamesSearch";
+import NotFoundPage from "../other-function/NotFoundPage";
 import GamesHome from "./GamesHome";
+import GamesId from "./GamesId";
+import GameLayout from "./GameLayout";
 
 export default function App() {
   return (
@@ -15,21 +15,16 @@ export default function App() {
       >
         <Link to="/">home</Link>
         <Link to="/games">games</Link>
-        <Link to="/games/1">games id</Link>
-        <Link to="/games/search">games search</Link>
       </nav>
-      {routes}
+      <Routes>
+        <Route path="/" element={<GamesHome />}></Route>
+        <Route path="/games" element={<GameLayout />}>
+          <Route index element={<h1>Games</h1>}></Route>
+          <Route path=":id" element={<GamesId />}></Route>
+          <Route path="search" element={<h1>games search</h1>}></Route>
+        </Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
+      </Routes>
     </>
   );
 }
-
-const routes: JSX.Element = (
-  <Routes>
-    <Route path="/" element={<GamesHome />}></Route>
-    <Route path="/games">
-      <Route index element={<GamesHome />}></Route>
-      <Route path=":id" element={<Games />}></Route>
-      <Route path="search" element={<GamesSearch />}></Route>
-    </Route>
-  </Routes>
-);

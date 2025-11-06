@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import App from "./routes/other-function/App.tsx";
+import App from "./routes/v3/App";
 import { StrictMode } from "react";
 import { BrowserRouter } from "react-router-dom";
 
