@@ -5,7 +5,7 @@ export default function App() {
   const routesElements = useRoutes(routes);
   return (
     <div>
-      {/*       <Routes>
+      {/*       <Routes location="/games">
         <Route path="/" element={<h1>Another Home</h1>}>
           {" "}
         </Route>
