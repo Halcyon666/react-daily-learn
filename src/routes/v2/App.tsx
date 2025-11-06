@@ -5,9 +5,9 @@ import GameLayout from "./GameLayout";
 export default function App() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<h1>anothre home</h1>}></Route>
-      </Routes>
+      </Routes> */}
       <nav>
         <ul>
           <li>
