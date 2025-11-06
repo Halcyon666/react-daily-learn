@@ -5,10 +5,11 @@ export default function GameLayout() {
     <nav>
       <ul>
         <li>
-          <Link to="search">search</Link>
+          {/* be careful of to value not only games but the full path */}
+          <Link to="/games/search">search</Link>
         </li>
         <li>
-          <Link to="1">game1</Link>
+          <Link to="/games/1">game1</Link>
         </li>
       </ul>
 

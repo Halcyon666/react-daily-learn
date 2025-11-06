@@ -1,8 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import NotFoundPage from "../other-function/NotFoundPage";
+import GameRoutes from "./gameRoutes";
 import GamesHome from "./GamesHome";
-import GamesId from "./GamesId";
-import GameLayout from "./GameLayout";
 
 export default function App() {
   return (
@@ -18,11 +17,8 @@ export default function App() {
       </nav>
       <Routes>
         <Route path="/" element={<GamesHome />}></Route>
-        <Route path="/games" element={<GameLayout />}>
-          <Route index element={<h1>Games</h1>}></Route>
-          <Route path=":id" element={<GamesId />}></Route>
-          <Route path="search" element={<h1>games search</h1>}></Route>
-        </Route>
+        {/* must "/*"" after "/games" */}
+        <Route path="/games/*" element={<GameRoutes />}></Route>
         <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
     </>
