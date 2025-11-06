@@ -1,0 +1,4 @@
+/* when using NavLink, after clicking one, will append a className of active to previous className*/
+.active {
+    color: red
+}

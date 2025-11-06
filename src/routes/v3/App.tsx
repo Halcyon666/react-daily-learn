@@ -1,5 +1,5 @@
 import { Link, Route, Routes } from "react-router-dom";
-import NotFoundPage from "../other-function/NotFoundPage";
+import NotFoundPage from "../nav-link-and-navigate/NotFoundPage";
 import GameRoutes from "./GameRoutes";
 import GamesHome from "./GamesHome";
 
