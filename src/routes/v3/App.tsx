@@ -12,7 +12,10 @@ export default function App() {
           flexDirection: "column",
         }}
       >
-        <Link to="/">home</Link>
+        {/* if using replace here, backward will be two pages instead of one page */}
+        <Link to="/" replace>
+          home
+        </Link>
         <Link to="/games">games</Link>
       </nav>
       <Routes>
