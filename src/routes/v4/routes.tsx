@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 
 import gameRoutes from "./gameRoutes";
 
+// equivalent to <Routes>...</Routes>
 export const routes: RouteObject[] = [
   {
     path: "/",

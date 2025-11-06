@@ -2,7 +2,7 @@ import { Link, useRoutes } from "react-router-dom";
 import { routes } from "./routes";
 
 export default function App() {
-  const gamesSubRoute = useRoutes(routes);
+  const routesElements = useRoutes(routes);
   return (
     <div>
       {/*       <Routes>
@@ -23,7 +23,7 @@ export default function App() {
           </li>
         </ul>
       </nav>
-      {gamesSubRoute}
+      {routesElements}
     </div>
   );
 }
