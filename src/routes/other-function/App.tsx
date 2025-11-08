@@ -1,12 +1,16 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import GameRoutes from "./GameRoutes";
 import Home from "./Home";
 import NotFoundPage from "./NotFoundPage";
 import "./style.css";
 
 export default function App() {
+  const state = useLocation().state;
+
+  console.log(state);
   return (
     <>
+      <h2>{state?.includes("Hi") ? "" : state}</h2>
       <nav>
         <ul>
           <li>
@@ -20,7 +24,7 @@ export default function App() {
                 return isActive ? "active home" : " home";
               }}
             </NavLink> */}
-            <NavLink to="/" className="a">
+            <NavLink to="/" className="a" state="Hi">
               home
             </NavLink>
           </li>

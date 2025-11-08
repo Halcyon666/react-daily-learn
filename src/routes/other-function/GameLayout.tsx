@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, Outlet, useSearchParams } from "react-router-dom";
 
 export default function GameLayout() {
@@ -17,7 +16,7 @@ export default function GameLayout() {
           <Link to="/games/1">game1</Link>
         </li>
         <li>
-          <Link to={`/games/${number}`}>game {number}</Link>
+          <Link to={`/games`}>games{number}</Link>
         </li>
       </ul>
 
