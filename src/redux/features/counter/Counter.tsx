@@ -1,4 +1,4 @@
-import "../../index.css";
+import "./index.css";
 import { decrement, increment, incrementByAmount, reset } from "./counterSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useState } from "react";
