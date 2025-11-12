@@ -3,8 +3,8 @@ import type { RootState } from "../../store";
 import { nanoid } from "nanoid";
 import { sub } from "date-fns";
 
-interface Reactions {
-  thumsUp: number;
+export interface Reactions {
+  thumbsUp: number;
   wow: number;
   heart: number;
   rocket: number;
@@ -26,7 +26,7 @@ const initialState: PostData[] = [
     content: "I've heard good things.",
     date: sub(new Date(), { minutes: 10 }).toISOString(),
     reactions: {
-      thumsUp: 0,
+      thumbsUp: 0,
       wow: 0,
       heart: 0,
       rocket: 0,
@@ -39,7 +39,7 @@ const initialState: PostData[] = [
     content: "the more I say slice, the more I want pizza.",
     date: sub(new Date(), { minutes: 5 }).toISOString(),
     reactions: {
-      thumsUp: 0,
+      thumbsUp: 0,
       wow: 0,
       heart: 0,
       rocket: 0,
@@ -65,7 +65,7 @@ const postsSlice = createSlice({
             userId,
             date: new Date().toISOString(),
             reactions: {
-              thumsUp: 0,
+              thumbsUp: 0,
               wow: 0,
               heart: 0,
               rocket: 0,
@@ -91,5 +91,5 @@ const postsSlice = createSlice({
 });
 
 export const selectAllPosts = (state: RootState) => state.posts;
-export const { postAdded } = postsSlice.actions;
+export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
