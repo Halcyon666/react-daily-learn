@@ -11,10 +11,16 @@ const AddPostForm = () => {
     setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLInputElement>) =>
     setContent(e.target.value);
+  // fix previous error
+  // React Hook "useAppDispatch" is called in function "savePost" that is
+  // neither a React function component nor a custom React Hook function.
+  // React component names must start with an uppercase letter. React Hook names must start with the word "use".
+  // Expected 0 arguments, but got 1.
+  const dispatch = useAppDispatch();
 
   const savePost = () => {
     if (title && content) {
-      useAppDispatch(postAdded({ id: nanoid(), title, content }));
+      dispatch(postAdded({ id: nanoid(), title, content }));
       setContent("");
       setTitle("");
     }
