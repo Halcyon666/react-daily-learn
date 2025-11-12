@@ -3,6 +3,7 @@ import { selectAllPosts, type PostData } from "./postsSlice";
 import "./index.css";
 import PostAuthor from "./PostAuthor";
 import TimeAgo from "./TimeAgo";
+import ReactionButtons from "./ReactionButtons";
 // rafce
 const PostsList = () => {
   //   const posts = useAppSelector((state) => state.posts);
@@ -20,6 +21,7 @@ const PostsList = () => {
         <PostAuthor userId={post.userId} />
       </p>
       <TimeAgo timestamp={post.date} />
+      <ReactionButtons {...post} />
     </article>
   ));
   return (

@@ -9,16 +9,17 @@ const reactionEmoji: Record<keyof Reactions, string> = {
   coffee: "☕",
 };
 
-const ReactionButtons = ({ id, reaction, reactions }: PostData) => {
+const ReactionButtons = ({ id, reactions }: PostData) => {
   const dispatch = useAppDispatch();
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
+    const reaction = name as keyof Reactions;
     return (
       <button
         key={name}
         className="reactionButton"
         onClick={() => dispatch(reactionAdded({ postId: id, reaction }))}
       >
-        {emoji} {reactions[name]}
+        {emoji} {reactions[reaction]}
       </button>
     );
   });
