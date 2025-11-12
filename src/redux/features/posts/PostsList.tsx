@@ -1,14 +1,25 @@
 import { useSelector } from "react-redux";
 import { selectAllPosts, type PostData } from "./postsSlice";
 import "./index.css";
+import PostAuthor from "./PostAuthor";
+import TimeAgo from "./TimeAgo";
 // rafce
 const PostsList = () => {
   //   const posts = useAppSelector((state) => state.posts);
   const posts = useSelector(selectAllPosts);
-  const renderedPosts = posts.map((post: PostData) => (
+
+  const orderedPosts = posts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  const renderedPosts = orderedPosts.map((post: PostData) => (
     <article key={post.id}>
       <h3>{post.title}</h3>
       <p>{post.content.substring(0, 100)}</p>
+      <p className="postCredit">
+        <PostAuthor userId={post.userId} />
+      </p>
+      <TimeAgo timestamp={post.date} />
     </article>
   ));
   return (

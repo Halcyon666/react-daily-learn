@@ -1,23 +1,28 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { nanoid } from "nanoid";
+import { sub } from "date-fns";
 
 export interface PostData {
   id: string;
   title: string;
   content: string;
+  userId?: string;
+  date: string;
 }
 
 const initialState: PostData[] = [
   {
-    id: "1",
+    id: nanoid(),
     title: "Learning Redux Toolkit",
     content: "I've heard good things.",
+    date: sub(new Date(), { minutes: 10 }).toISOString(),
   },
   {
-    id: "2",
+    id: nanoid(),
     title: "Slices...",
     content: "the more I say slice, the more I want pizza.",
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
   },
 ];
 
@@ -29,12 +34,14 @@ const postsSlice = createSlice({
       reducer: (state, action: PayloadAction<PostData>) => {
         state.push(action.payload);
       },
-      prepare: (title: string, content: string) => {
+      prepare: (title: string, content: string, userId: string) => {
         return {
           payload: {
             id: nanoid(),
             title,
             content,
+            userId,
+            date: new Date().toISOString(),
           },
         };
       },

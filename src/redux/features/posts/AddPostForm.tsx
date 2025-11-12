@@ -1,30 +1,42 @@
-import { nanoid } from "nanoid";
 import { useState, type ChangeEvent } from "react";
-import { postAdded } from "./postsSlice";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks";
+import { postAdded } from "./postsSlice";
+import { selectAllusers } from "./usersSlice";
 
 const AddPostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [userId, setUserId] = useState("");
+  const users = useSelector(selectAllusers);
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLInputElement>) =>
     setContent(e.target.value);
+  const onUserIdChange = (e: ChangeEvent<HTMLSelectElement>) =>
+    setUserId(e.target.value);
   // fix previous error
   // React Hook "useAppDispatch" is called in function "savePost" that is
   // neither a React function component nor a custom React Hook function.
   // React component names must start with an uppercase letter. React Hook names must start with the word "use".
   // Expected 0 arguments, but got 1.
   const dispatch = useAppDispatch();
-
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
   const savePost = () => {
     if (title && content) {
-      dispatch(postAdded(title, content));
+      dispatch(postAdded(title, content, userId));
       setContent("");
       setTitle("");
     }
   };
+
+  const usersOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ));
+
   return (
     <section>
       <h2>Add a New Post</h2>
@@ -37,7 +49,7 @@ const AddPostForm = () => {
           value={title}
           onChange={onTitleChange}
         />
-        <label htmlFor="postContent">Post Title:</label>
+        <label htmlFor="postContent">Post Content:</label>
         <input
           type="text"
           id="postContent"
@@ -45,7 +57,17 @@ const AddPostForm = () => {
           value={content}
           onChange={onContentChange}
         />
-        <button type="button" onClick={savePost}>
+        <label htmlFor="postUserId">Author:</label>
+        <select
+          id="postUserId"
+          value={userId}
+          onChange={onUserIdChange}
+          name="postUserId"
+        >
+          <option value=""></option>
+          {usersOptions}
+        </select>
+        <button type="button" onClick={savePost} disabled={!canSave}>
           Save Post
         </button>
       </form>
