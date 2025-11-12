@@ -77,9 +77,12 @@ const postsSlice = createSlice({
     },
 
     // The issue is that reactionAdded is expecting a different payload type. It needs id and reaction, not the full PostData. Here's the corrected code:
-    reactionAdded: (state, action: PayloadAction<PostData>) => {
-      const { id, reaction } = action.payload;
-      const existingPost = state.find((post) => post.id === id);
+    reactionAdded: (
+      state,
+      action: PayloadAction<{ postId: string; reaction: keyof Reactions }>
+    ) => {
+      const { postId, reaction } = action.payload;
+      const existingPost = state.find((post) => post.id === postId);
       if (existingPost) {
         existingPost.reactions[reaction]++;
       }
