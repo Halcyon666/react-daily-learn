@@ -12,6 +12,7 @@ const reactionEmoji: Record<keyof Reactions, string> = {
 const ReactionButtons = ({ id, reactions }: PostData) => {
   const dispatch = useAppDispatch();
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
+    // fix error
     const reaction = name as keyof Reactions;
     return (
       <button

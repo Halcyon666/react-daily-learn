@@ -79,6 +79,7 @@ const postsSlice = createSlice({
     // The issue is that reactionAdded is expecting a different payload type. It needs id and reaction, not the full PostData. Here's the corrected code:
     reactionAdded: (
       state,
+      // fix error
       action: PayloadAction<{ postId: string; reaction: keyof Reactions }>
     ) => {
       const { postId, reaction } = action.payload;
