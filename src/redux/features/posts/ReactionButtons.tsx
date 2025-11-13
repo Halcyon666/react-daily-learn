@@ -3,10 +3,10 @@ import { reactionAdded, type PostData, type Reactions } from "./postsSlice";
 
 const reactionEmoji: Record<keyof Reactions, string> = {
   thumbsUp: "👍",
-  wow: "😮",
+  hooray: "🎉",
   heart: "❤️",
   rocket: "🚀",
-  coffee: "☕",
+  eyes: "👀",
 };
 
 const ReactionButtons = ({ id, reactions }: PostData) => {

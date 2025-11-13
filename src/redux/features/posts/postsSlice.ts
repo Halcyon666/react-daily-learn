@@ -10,10 +10,10 @@ import { sub } from "date-fns";
 
 export interface Reactions {
   thumbsUp: number;
-  wow: number;
+  hooray: number;
   heart: number;
   rocket: number;
-  coffee: number;
+  eyes: number;
 }
 export interface PostData {
   id: string;
@@ -61,10 +61,10 @@ const postsSlice = createSlice({
             date: new Date().toISOString(),
             reactions: {
               thumbsUp: 0,
-              wow: 0,
+              hooray: 0,
               heart: 0,
               rocket: 0,
-              coffee: 0,
+              eyes: 0,
             },
           },
         };
