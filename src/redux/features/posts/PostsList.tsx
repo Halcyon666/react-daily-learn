@@ -24,7 +24,7 @@ const PostsList = () => {
 
   let content;
 
-  if (postStatus) {
+  if (postStatus === "loading") {
     content = <p>"loading..."</p>;
   } else if (postStatus === "succeeded") {
     const orderedPosts = posts
