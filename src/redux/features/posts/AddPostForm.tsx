@@ -14,7 +14,7 @@ const AddPostForm = () => {
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
-  const onContentChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setContent(e.target.value);
   const onUserIdChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setUserId(e.target.value);
@@ -57,14 +57,7 @@ const AddPostForm = () => {
           value={title}
           onChange={onTitleChange}
         />
-        <label htmlFor="postContent">Post Content:</label>
-        <input
-          type="text"
-          id="postContent"
-          name="postContent"
-          value={content}
-          onChange={onContentChange}
-        />
+
         <label htmlFor="postUserId">Author:</label>
         <select
           id="postUserId"
@@ -75,6 +68,14 @@ const AddPostForm = () => {
           <option value=""></option>
           {usersOptions}
         </select>
+        <label htmlFor="postContent">Post Content:</label>
+        <textarea
+          id="postContent"
+          name="postContent"
+          value={content}
+          onChange={onContentChange}
+        />
+
         <button type="button" onClick={savePost} disabled={!canSave}>
           Save Post
         </button>
