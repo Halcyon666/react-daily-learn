@@ -16,6 +16,7 @@ export interface Reactions {
   eyes: number;
 }
 export interface PostData {
+  // just for the key prop in loop
   id: string;
   title: string;
   body: string;
@@ -30,12 +31,22 @@ interface PostDataDto {
   error: string | null | undefined;
 }
 
-export const fetchPosts = createAsyncThunk("post/fetchPosts", async () => {
-  const response = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
-  return [...response.data];
-});
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
+export const fetchPosts = createAsyncThunk<PostData[]>(
+  "post/fetchPosts",
+  async () => {
+    const response = await axios.get(POSTS_URL);
+    return [...response.data];
+  }
+);
+
+export const addNewPost = createAsyncThunk(
+  "post/addNewPost",
+  async (initialPost: { title: string; body: string; userId: string }) => {
+    const response = await axios.post(POSTS_URL, initialPost);
+    return response.data;
+  }
+);
 
 const initialState: PostDataDto = {
   posts: [],
@@ -112,6 +123,20 @@ const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        // NOTE API userId is number   userId: 1
+        action.payload.userId = Number(action.payload.userId);
+        action.payload.date = new Date().toISOString();
+        action.payload.reactions = {
+          thumbsUp: 0,
+          hooray: 0,
+          heart: 0,
+          rocket: 0,
+          eyes: 0,
+        };
+        console.log(action.payload);
+        state.posts.push(action.payload);
       });
   },
 });
