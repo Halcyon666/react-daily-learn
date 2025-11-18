@@ -16,7 +16,7 @@ export interface Reactions {
   eyes: number;
 }
 export interface PostData {
-  // just for the key prop in loop
+  // just for the key prop in loop, but the type is number in api result
   id: string;
   title: string;
   body: string;
@@ -144,5 +144,8 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state: RootState) => state.posts.posts;
 export const getPostStatus = (state: RootState) => state.posts.status;
 export const getPostError = (state: RootState) => state.posts.error;
+
+export const selectPostById = (state: RootState, postId: number | undefined) =>
+  state.posts.posts.find((post) => Number(post.id) === postId);
 export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;

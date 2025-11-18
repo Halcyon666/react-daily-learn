@@ -1,13 +1,19 @@
+import { Route, Routes } from "react-router-dom";
 import AddPostForm from "./AddPostForm";
 import PostsList from "./PostsList";
+import Layout from "../../components/Layout";
+import SinglePostPage from "./SinglePostPage";
 
-const App = () => {
-  return (
-    <>
-      <AddPostForm />
-      <PostsList />
-    </>
-  );
-};
+const App = () => (
+  <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<PostsList />} />
+      <Route path="post">
+        <Route index element={<AddPostForm />} />
+        <Route path=":postId" element={<SinglePostPage />} />
+      </Route>
+    </Route>
+  </Routes>
+);
 
 export default App;
