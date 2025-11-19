@@ -29,6 +29,7 @@ interface PostDataDto {
   posts: PostData[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null | undefined;
+  count: number;
 }
 
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
@@ -83,6 +84,7 @@ const initialState: PostDataDto = {
   posts: [],
   status: "idle",
   error: null,
+  count: 0,
 };
 
 const postsSlice = createSlice({
@@ -124,6 +126,9 @@ const postsSlice = createSlice({
       if (existingPost) {
         existingPost.reactions[reaction]++;
       }
+    },
+    increaseCount: (state) => {
+      state.count = state.count + 1;
     },
   },
   extraReducers: (builder) => {
@@ -197,8 +202,9 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state: RootState) => state.posts.posts;
 export const getPostStatus = (state: RootState) => state.posts.status;
 export const getPostError = (state: RootState) => state.posts.error;
+export const getCount = (state: RootState) => state.posts.count;
 
 export const selectPostById = (state: RootState, postId: number | undefined) =>
   state.posts.posts.find((post) => Number(post.id) === postId);
-export const { postAdded, reactionAdded } = postsSlice.actions;
+export const { postAdded, reactionAdded, increaseCount } = postsSlice.actions;
 export default postsSlice.reducer;
