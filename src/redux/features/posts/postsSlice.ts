@@ -1,5 +1,6 @@
 import {
   createAsyncThunk,
+  createSelector,
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
@@ -206,5 +207,11 @@ export const getCount = (state: RootState) => state.posts.count;
 
 export const selectPostById = (state: RootState, postId: number | undefined) =>
   state.posts.posts.find((post) => Number(post.id) === postId);
+export const selectPostByUser = createSelector(
+  [selectAllPosts, (_, userId) => userId],
+  (posts, userId) =>
+    posts.filter((post) => Number(post.userId) === Number(userId))
+);
+
 export const { postAdded, reactionAdded, increaseCount } = postsSlice.actions;
 export default postsSlice.reducer;
