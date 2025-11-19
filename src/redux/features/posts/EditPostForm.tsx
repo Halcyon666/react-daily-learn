@@ -2,7 +2,7 @@ import { useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import type { RootState } from "../../store";
-import { selectPostById, updatePost } from "./postsSlice";
+import { deletePost, selectPostById, updatePost } from "./postsSlice";
 import { selectAllusers } from "./usersSlice";
 
 const EditPostForm = () => {
@@ -59,6 +59,22 @@ const EditPostForm = () => {
       }
     }
   };
+
+  const deletePostClick = () => {
+    try {
+      setRequestStatus("pending");
+      dispatch(deletePost({ id: post.id })).unwrap();
+
+      setTitle("");
+      setContent("");
+      setUserId("");
+      navigate("/");
+    } catch (err) {
+      console.log("Failed to delete the post", err);
+    } finally {
+      setRequestStatus("idle");
+    }
+  };
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}
@@ -97,6 +113,9 @@ const EditPostForm = () => {
 
         <button type="button" onClick={updatePostClick} disabled={!canUpdate}>
           Edit Post
+        </button>
+        <button type="button" onClick={deletePostClick}>
+          Delete Post
         </button>
       </form>
     </section>

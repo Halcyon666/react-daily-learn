@@ -21,7 +21,7 @@ export interface PostData {
   title: string;
   body: string;
   userId?: string;
-  date?: string;
+  date: string;
   reactions: Reactions;
 }
 
@@ -50,10 +50,26 @@ export const addNewPost = createAsyncThunk(
 
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
-  async (initialPost: PostData) => {
+  async (initialPost: {
+    id: string;
+    title: string;
+    body: string;
+    userId: string;
+    reactions: Reactions;
+  }) => {
     const { id } = initialPost;
     const response = await axios.put(`${POSTS_URL}/${id}`, initialPost);
     return response.data;
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async (initialPost: { id: string }) => {
+    const { id } = initialPost;
+    const response = await axios.delete(`${POSTS_URL}/${id}`);
+    if (response?.status === 200) return initialPost;
+    throw new Error(`${response?.status}: ${response?.statusText}`);
   }
 );
 
@@ -149,7 +165,7 @@ const postsSlice = createSlice({
       })
       .addCase(updatePost.fulfilled, (state, action) => {
         if (!action.payload?.id) {
-          console.log("Update could not complete, thus of id not exists!");
+          console.log("Update could not complete");
           console.log(action.payload);
           return;
         }
@@ -157,6 +173,17 @@ const postsSlice = createSlice({
         action.payload.date = new Date().toISOString();
         const oldPosts = state.posts.filter((post) => post.id !== id);
         state.posts = [...oldPosts, action.payload];
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        if (!action.payload.id) {
+          console.log("Delete could not complete");
+          console.log(action.payload);
+          return;
+        }
+
+        const { id } = action.payload;
+        const posts = state.posts.filter((post) => post.id !== id);
+        state.posts = posts;
       });
   },
 });
