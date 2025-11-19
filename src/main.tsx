@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { store } from "./redux/store.ts";
-import App from "./redux/features/posts/App";
-import { fetchUsers } from "./redux/features/posts/usersSlice.ts";
+import App from "./redux/App.tsx";
+import { fetchUsers } from "./redux/features/users/usersSlice.ts";
 import { fetchPosts } from "./redux/features/posts/postsSlice.ts";
 
 // Wait for initial data

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import type { RootState } from "../../store";
 import { deletePost, selectPostById, updatePost } from "./postsSlice";
-import { selectAllusers } from "./usersSlice";
+import { selectAllusers } from "../users/usersSlice";
 
 const EditPostForm = () => {
   const { postId } = useParams();

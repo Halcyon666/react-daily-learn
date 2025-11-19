@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../hooks";
-import "./index.css";
 import PostExcerpt from "./PostExcerpt";
 import {
   getPostError,

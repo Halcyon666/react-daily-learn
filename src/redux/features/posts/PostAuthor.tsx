@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks";
-import { selectAllusers } from "./usersSlice";
+import { selectAllusers } from "../users/usersSlice";
 
 // need to destructure userId
 const PostAuthor = ({ userId }: { userId: string | undefined }) => {

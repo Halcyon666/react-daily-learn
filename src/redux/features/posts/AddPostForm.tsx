@@ -2,7 +2,7 @@ import { useState, type ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks";
 import { addNewPost } from "./postsSlice";
-import { selectAllusers } from "./usersSlice";
+import { selectAllusers } from "../users/usersSlice";
 import { useNavigate } from "react-router-dom";
 
 const AddPostForm = () => {
