@@ -1,9 +1,7 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import "./index.css";
 import PostExcerpt from "./PostExcerpt";
 import {
-  fetchPosts,
   getPostError,
   getPostStatus,
   selectAllPosts,
@@ -11,16 +9,9 @@ import {
 } from "./postsSlice";
 
 const PostsList = () => {
-  const dispatch = useAppDispatch();
   const posts = useAppSelector(selectAllPosts);
   const postStatus = useAppSelector(getPostStatus);
   const error = useAppSelector(getPostError);
-
-  useEffect(() => {
-    if (postStatus === "idle") {
-      dispatch(fetchPosts());
-    }
-  }, [postStatus, dispatch]);
 
   let content;
 
