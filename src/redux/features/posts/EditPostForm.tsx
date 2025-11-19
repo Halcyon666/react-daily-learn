@@ -1,10 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
-import type { RootState } from "../../store";
-import { selectPostById } from "./postsSlice";
-import { selectAllusers } from "./usersSlice";
 import { useState, type ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import type { RootState } from "../../store";
+import { selectPostById, updatePost } from "./postsSlice";
+import { selectAllusers } from "./usersSlice";
 
 const EditPostForm = () => {
   const { postId } = useParams();
@@ -14,11 +13,11 @@ const EditPostForm = () => {
     selectPostById(state, Number(postId))
   );
   const users = useAppSelector(selectAllusers);
-  const [title, setTitle] = useState(post?.title);
-  const [content, setContent] = useState(post?.body);
-  const [userId, setUserId] = useState(post?.userId);
+  const [title, setTitle] = useState(post?.title || "");
+  const [content, setContent] = useState(post?.body || "");
+  const [userId, setUserId] = useState(post?.userId || "");
   const [requestStatus, setRequestStatus] = useState("idle");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   if (!post) {
     return (
@@ -52,7 +51,7 @@ const EditPostForm = () => {
         setTitle("");
         setContent("");
         setUserId("");
-        navigate(`{/post/${postId}}`);
+        navigate(`/post/${postId}`);
       } catch (err) {
         console.log("Failed to update the post", err);
       } finally {
@@ -81,7 +80,6 @@ const EditPostForm = () => {
         <label htmlFor="postUserId">Author:</label>
         <select
           id="postUserId"
-          value={userId}
           defaultValue={userId}
           onChange={onUserIdChange}
           name="postUserId"

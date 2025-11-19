@@ -12,9 +12,10 @@ const App = () => (
       <Route path="post">
         <Route index element={<AddPostForm />} />
         <Route path=":postId" element={<SinglePostPage />} />
-        <Route path="edit">
+        {/* <Route path="edit">
           <Route path=":postId" element={<EditPostForm />} />
-        </Route>
+          </Route> */}
+        <Route path="edit/:postId" element={<EditPostForm />} />
       </Route>
     </Route>
   </Routes>
