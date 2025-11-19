@@ -114,7 +114,11 @@ const EditPostForm = () => {
         <button type="button" onClick={updatePostClick} disabled={!canUpdate}>
           Edit Post
         </button>
-        <button type="button" onClick={deletePostClick}>
+        <button
+          type="button"
+          className="deleteButton"
+          onClick={deletePostClick}
+        >
           Delete Post
         </button>
       </form>

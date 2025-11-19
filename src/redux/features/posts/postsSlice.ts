@@ -58,8 +58,14 @@ export const updatePost = createAsyncThunk(
     reactions: Reactions;
   }) => {
     const { id } = initialPost;
-    const response = await axios.put(`${POSTS_URL}/${id}`, initialPost);
-    return response.data;
+    try {
+      const response = await axios.put(`${POSTS_URL}/${id}`, initialPost);
+      return response.data;
+    } catch (err) {
+      console.log("update failed", err);
+      // only for testing Redux!
+      return initialPost;
+    }
   }
 );
 
