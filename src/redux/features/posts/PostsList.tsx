@@ -1,14 +1,9 @@
 import { useAppSelector } from "../../hooks";
 import PostExcerpt from "./PostExcerpt";
-import {
-  getPostError,
-  getPostStatus,
-  selectAllPosts,
-  type PostData,
-} from "./postsSlice";
+import { getPostError, getPostStatus, selectPostIds } from "./postsSlice";
 
 const PostsList = () => {
-  const posts = useAppSelector(selectAllPosts);
+  const orderedPostIds = useAppSelector(selectPostIds);
   const postStatus = useAppSelector(getPostStatus);
   const error = useAppSelector(getPostError);
 
@@ -17,12 +12,8 @@ const PostsList = () => {
   if (postStatus === "loading") {
     content = <p>"loading..."</p>;
   } else if (postStatus === "succeeded") {
-    const orderedPosts = posts
-      .slice()
-      .sort((a, b) => b.date.localeCompare(a.date));
-    content = orderedPosts.map((post: PostData) => (
-      <PostExcerpt key={post.id} {...post} />
-    ));
+    // 正确写法：先拿 id，再用 selectByPostId 获取对应实体
+    content = orderedPostIds.map((id) => <PostExcerpt key={id} id={id} />);
   } else if (postStatus === "failed") {
     content = <p>{error}</p>;
   }

@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks";
 import PostAuthor from "./PostAuthor";
 import ReactionButtons from "./ReactionButtons";
 import TimeAgo from "./TimeAgo";
-import type { PostData } from "./postsSlice";
+import { selectPostById } from "./postsSlice";
 
-const PostExcerpt = (post: PostData) => {
+const PostExcerpt = ({ id }: { id: string }) => {
+  // 在 PostExcerpt 里根据 id 取数据
+  const post = useAppSelector((state) => selectPostById(state, id));
   return (
     <article>
       <h2>{post.title}</h2>
