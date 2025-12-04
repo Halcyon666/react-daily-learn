@@ -6,6 +6,7 @@ import { store } from "./redux/store.ts";
 import App from "./redux/App.tsx";
 import { fetchUsers } from "./redux/features/users/usersSlice.ts";
 import { fetchPosts } from "./redux/features/posts/postsSlice.ts";
+import "./index.css";
 
 // Wait for initial data
 await Promise.all([store.dispatch(fetchUsers()), store.dispatch(fetchPosts())]);

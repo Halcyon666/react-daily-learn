@@ -18,7 +18,12 @@ const PostsList = () => {
     content = <p>{error}</p>;
   }
 
-  return <section>{content}</section>;
+  return (
+    <>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <section>{content}</section>
+    </>
+  );
 };
 
 export default PostsList;
