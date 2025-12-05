@@ -46,9 +46,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.33.0
     version: 9.35.0
-  '@tailwindcss/postcss':
+  '@tailwindcss/vite':
     specifier: ^4.1.17
-    version: 4.1.17
+    version: 4.1.17(vite@7.1.5)
   '@types/react':
     specifier: ^19.1.10
     version: 19.1.12
@@ -70,9 +70,6 @@ devDependencies:
   globals:
     specifier: ^16.3.0
     version: 16.4.0
-  postcss:
-    specifier: ^8.5.6
-    version: 8.5.6
   tailwindcss:
     specifier: ^4.1.17
     version: 4.1.17
@@ -87,11 +84,6 @@ devDependencies:
     version: 7.1.5
 
 packages:
-
-  /@alloc/quick-lru@5.2.0:
-    resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
-    engines: {node: '>=10'}
-    dev: true
 
   /@anthropic-ai/sdk@0.65.0:
     resolution: {integrity: sha512-zIdPOcrCVEI8t3Di40nH4z9EoeyGZfXbYSvWdDLsB/KkaSYMnEgC7gmcgWu83g2NTn1ZTpbMvpdttWDGGIk6zw==}
@@ -980,14 +972,15 @@ packages:
       '@tailwindcss/oxide-win32-x64-msvc': 4.1.17
     dev: true
 
-  /@tailwindcss/postcss@4.1.17:
-    resolution: {integrity: sha512-+nKl9N9mN5uJ+M7dBOOCzINw94MPstNR/GtIhz1fpZysxL/4a+No64jCBD6CPN+bIHWFx3KWuu8XJRrj/572Dw==}
+  /@tailwindcss/vite@4.1.17(vite@7.1.5):
+    resolution: {integrity: sha512-4+9w8ZHOiGnpcGI6z1TVVfWaX/koK7fKeSYF3qlYg2xpBtbteP2ddBxiarL+HVgfSJGeK5RIxRQmKm4rTJJAwA==}
+    peerDependencies:
+      vite: ^5.2.0 || ^6 || ^7
     dependencies:
-      '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.1.17
       '@tailwindcss/oxide': 4.1.17
-      postcss: 8.5.6
       tailwindcss: 4.1.17
+      vite: 7.1.5
     dev: true
 
   /@types/debug@4.1.12:
