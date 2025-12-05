@@ -7,7 +7,7 @@ const Header = () => {
   const count = useAppSelector(getCount);
   return (
     <header className="Header">
-      <h1>Redux Blog</h1>
+      <h1 className="text-3xl font-bold whitesmoke">Redux Blog</h1>
       <nav>
         <ul>
           <li>
