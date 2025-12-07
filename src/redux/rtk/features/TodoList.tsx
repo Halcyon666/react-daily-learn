@@ -1,13 +1,20 @@
-import { faUpload, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, type FormEvent } from "react";
 import {
   useAddTodoMutation,
+  useDeleteTodoMutation,
   useGetTodosQuery,
   useUpdateTodoMutation,
-  useDeleteTodoMutation,
 } from "../api/apiSlice";
-import { nanoid } from "nanoid";
+import type { Todo } from "../type/Todo";
+
+const getNextId = (todos: Todo[] | undefined): string => {
+  if (!todos || !todos.length) return "1"; // 没有数据时从 1 开始
+
+  const maxId = Math.max(...todos.map((todo) => Number(todo.id)));
+  return String(maxId + 1);
+};
 
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState("");
@@ -25,7 +32,12 @@ const TodoList = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    addTodo({ userId: 1, title: newTodo, completed: false });
+    addTodo({
+      userId: 1,
+      id: getNextId(todos),
+      title: newTodo,
+      completed: false,
+    });
     setNewTodo("");
   };
 
