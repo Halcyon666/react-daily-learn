@@ -7,6 +7,7 @@ import {
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } from "../api/apiSlice";
+import { nanoid } from "nanoid";
 
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState("");

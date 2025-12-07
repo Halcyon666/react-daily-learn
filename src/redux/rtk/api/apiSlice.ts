@@ -30,7 +30,6 @@ export const apiSlice = createApi({
       query: ({ id }) => ({
         url: `/todos/${id}`,
         method: "DELETE",
-        body: id,
       }),
       invalidatesTags: ["Todos"],
     }),
