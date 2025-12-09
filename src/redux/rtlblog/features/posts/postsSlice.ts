@@ -1,5 +1,5 @@
 // src/redux/rtlblog/features/posts/postsSlice.ts
-import { createEntityAdapter } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { sub } from "date-fns";
 import type { RootState } from "../../store";
 import { apiSlice as baseApiSlice } from "../api/apiSlice";
@@ -76,15 +76,18 @@ export const extenedApiSlice = baseApiSlice.injectEndpoints({
 
 export const { useGetPostsQuery } = extenedApiSlice;
 
+export const selectPostsResult = extenedApiSlice.endpoints.getPosts.select();
+
+const selectPostsData = createSelector(
+  selectPostsResult,
+  (postsResult) => postsResult.data
+);
+
 // Selectors: derive the EntityState<PostData> from the RTK Query cache
 export const {
   selectAll: selectAllPosts,
   selectById: selectPostById,
   selectIds: selectPostIds,
-} = postsAdapter.getSelectors((state: RootState) => {
-  // IMPORTANT: .select(undefined) for a query with no parameters
-  const queryResult =
-    extenedApiSlice.endpoints.getPosts.select(undefined)(state);
-  // queryResult?.data is the normalized EntityState<PostData> we returned in transformResponse
-  return queryResult?.data ?? initialState;
-});
+} = postsAdapter.getSelectors(
+  (state: RootState) => selectPostsData(state) ?? initialState
+);
