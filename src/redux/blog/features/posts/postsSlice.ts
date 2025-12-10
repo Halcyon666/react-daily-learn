@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import { sub } from "date-fns";
 import { nanoid } from "nanoid";
-import type { RootState } from "../../store";
+import type { RootState } from "../../store.ts.bak";
 
 export interface Reactions {
   thumbsUp: number;

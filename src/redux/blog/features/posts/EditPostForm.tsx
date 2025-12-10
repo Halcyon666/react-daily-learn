@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import type { RootState } from "../../store";
+import type { RootState } from "../../store.ts.bak";
 import { deletePost, selectPostById, updatePost } from "./postsSlice";
 import { selectAllusers } from "../users/usersSlice";
 

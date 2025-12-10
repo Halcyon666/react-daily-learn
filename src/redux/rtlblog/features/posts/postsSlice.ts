@@ -36,7 +36,7 @@ export const extenedApiSlice = baseApiSlice.injectEndpoints({
       // query arg type
       void
     >({
-      query: () => "/post",
+      query: () => "/posts",
       transformResponse: (responseData: PostData[]) => {
         let min = 1;
         const loadedPosts = responseData.map((post) => {
