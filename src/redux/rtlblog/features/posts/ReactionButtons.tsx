@@ -1,5 +1,8 @@
-import { useAppDispatch } from "../../hooks";
-import { reactionAdded, type PostData, type Reactions } from "./postsSlice";
+import {
+  useAddReactionMutation,
+  type PostData,
+  type Reactions,
+} from "./postsSlice";
 
 const reactionEmoji: Record<keyof Reactions, string> = {
   thumbsUp: "👍",
@@ -10,7 +13,7 @@ const reactionEmoji: Record<keyof Reactions, string> = {
 };
 
 const ReactionButtons = ({ id, reactions }: PostData) => {
-  const dispatch = useAppDispatch();
+  const [addReaction] = useAddReactionMutation();
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     // fix error
     const reaction = name as keyof Reactions;
@@ -18,7 +21,13 @@ const ReactionButtons = ({ id, reactions }: PostData) => {
       <button
         key={name}
         className="reactionButton"
-        onClick={() => dispatch(reactionAdded({ postId: id, reaction }))}
+        onClick={() => {
+          const newValue = reactions[reaction] + 1;
+          addReaction({
+            postId: id,
+            reactions: { ...reactions, [reaction]: newValue },
+          });
+        }}
       >
         {emoji} {reactions[reaction]}
       </button>

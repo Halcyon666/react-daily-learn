@@ -1,15 +1,15 @@
 import { useState, type ChangeEvent } from "react";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../hooks";
-import { addNewPost } from "./postsSlice";
-import { selectAllusers } from "../users/usersSlice";
 import { useNavigate } from "react-router-dom";
+import { selectAllusers } from "../users/usersSlice";
+import { useAddNewPostMutation } from "./postsSlice";
 
 const AddPostForm = () => {
+  const [addNewPost, { isLoading }] = useAddNewPostMutation();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
-  const [addNewPostStatus, setNewPostStatus] = useState("idle");
 
   const users = useSelector(selectAllusers);
   const navigate = useNavigate();
@@ -22,22 +22,19 @@ const AddPostForm = () => {
     setUserId(e.target.value);
   // fix previous error
   // Expected 0 arguments, but got 1.
-  const dispatch = useAppDispatch();
-  const canSave =
-    [title, content, userId].every(Boolean) && addNewPostStatus === "idle";
-  const savePost = () => {
+  // const dispatch = useAppDispatch();
+  const canSave = [title, content, userId].every(Boolean) && !isLoading;
+  const savePost = async () => {
     if (canSave) {
       try {
-        setNewPostStatus("pending");
-        dispatch(addNewPost({ title, body: content, userId })).unwrap();
+        await addNewPost({ title, body: content, userId }).unwrap();
+
         setTitle("");
         setContent("");
         setUserId("");
         navigate("/");
       } catch (err) {
         console.log("Failed to save the post", err);
-      } finally {
-        setNewPostStatus("idle");
       }
     }
   };

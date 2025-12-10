@@ -1,13 +1,20 @@
 import { useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import type { RootState } from "../../store";
-import { deletePost, selectPostById, updatePost } from "./postsSlice";
 import { selectAllusers } from "../users/usersSlice";
+import {
+  selectPostById,
+  useDeletePostMutation,
+  useUpdatePostMutation,
+} from "./postsSlice";
 
 const EditPostForm = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
+
+  const [updatePost, { isLoading }] = useUpdatePostMutation();
+  const [deletePost] = useDeletePostMutation();
 
   const post = useAppSelector((state: RootState) =>
     selectPostById(state, Number(postId))
@@ -16,8 +23,6 @@ const EditPostForm = () => {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.body || "");
   const [userId, setUserId] = useState(post?.userId || "");
-  const [requestStatus, setRequestStatus] = useState("idle");
-  const dispatch = useAppDispatch();
 
   if (!post) {
     return (
@@ -33,37 +38,30 @@ const EditPostForm = () => {
     setContent(e.target.value);
   const onUserIdChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setUserId(e.target.value);
-  const canUpdate =
-    [title, content, userId].every(Boolean) && requestStatus === "idle";
-  const updatePostClick = () => {
+  const canUpdate = [title, content, userId].every(Boolean) && !isLoading;
+  const updatePostClick = async () => {
     if (canUpdate) {
       try {
-        setRequestStatus("pending");
-        dispatch(
-          updatePost({
-            id: post.id,
-            title,
-            body: content,
-            userId,
-            reactions: post.reactions,
-          })
-        ).unwrap();
+        await updatePost({
+          id: post.id,
+          title,
+          body: content,
+          userId,
+        }).unwrap();
+
         setTitle("");
         setContent("");
         setUserId("");
         navigate(`/post/${postId}`);
       } catch (err) {
         console.log("Failed to update the post", err);
-      } finally {
-        setRequestStatus("idle");
       }
     }
   };
 
-  const deletePostClick = () => {
+  const deletePostClick = async () => {
     try {
-      setRequestStatus("pending");
-      dispatch(deletePost({ id: post.id })).unwrap();
+      await deletePost({ id: post.id }).unwrap();
 
       setTitle("");
       setContent("");
@@ -71,8 +69,6 @@ const EditPostForm = () => {
       navigate("/");
     } catch (err) {
       console.log("Failed to delete the post", err);
-    } finally {
-      setRequestStatus("idle");
     }
   };
   const usersOptions = users.map((user) => (

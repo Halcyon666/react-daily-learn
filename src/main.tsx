@@ -4,12 +4,15 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./redux/blog/App.tsx";
-import { fetchPosts } from "./redux/blog/features/posts/postsSlice.ts";
-import { fetchUsers } from "./redux/blog/features/users/usersSlice.ts";
-import { store } from "./redux/blog/store.ts";
+import { store } from "./redux/rtlblog/store.ts";
+import { fetchUsers } from "./redux/rtlblog/features/users/usersSlice.ts";
+import { extenedApiSlice } from "./redux/rtlblog/features/posts/postsSlice.ts";
 
 // Wait for initial data
-await Promise.all([store.dispatch(fetchUsers()), store.dispatch(fetchPosts())]);
+await Promise.all([
+  store.dispatch(fetchUsers()),
+  store.dispatch(extenedApiSlice.endpoints.getPosts.initiate()),
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

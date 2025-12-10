@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks";
 import { selectAllusers } from "../users/usersSlice";
 
@@ -5,7 +6,16 @@ import { selectAllusers } from "../users/usersSlice";
 const PostAuthor = ({ userId }: { userId: string | undefined }) => {
   const users = useAppSelector(selectAllusers);
   const author = users.find((user) => user.id === userId);
-  return <span>by {author ? author.name : "Unknown author"}</span>;
+  return (
+    <span>
+      by{" "}
+      {author ? (
+        <Link to={`/user/${userId}`}>{author.name}</Link>
+      ) : (
+        "Unknown author"
+      )}
+    </span>
+  );
 };
 
 export default PostAuthor;
