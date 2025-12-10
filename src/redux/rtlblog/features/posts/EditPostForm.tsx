@@ -17,7 +17,7 @@ const EditPostForm = () => {
   const [deletePost] = useDeletePostMutation();
 
   const post = useAppSelector((state: RootState) =>
-    selectPostById(state, Number(postId))
+    selectPostById(state, postId as string)
   );
   const users = useAppSelector(selectAllusers);
   const [title, setTitle] = useState(post?.title || "");

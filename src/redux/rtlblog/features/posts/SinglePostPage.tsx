@@ -7,7 +7,9 @@ import TimeAgo from "./TimeAgo";
 
 const SinglePostPage = () => {
   const { postId } = useParams();
-  const post = useAppSelector((state) => selectPostById(state, Number(postId)));
+  const post = useAppSelector((state) =>
+    selectPostById(state, postId as string)
+  );
   if (!post) {
     return (
       <section>
