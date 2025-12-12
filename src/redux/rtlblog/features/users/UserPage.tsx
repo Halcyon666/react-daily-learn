@@ -17,9 +17,11 @@ const UserPage = () => {
     isSuccess: isSuccessUser,
     isError: isErrorUser,
     error: errorUser,
-  } = useGetUsersQuery("getUsers", {
+  } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data, isLoading, isSuccess, isError, error }) => ({
-      user: data?.entities[userId],
+      // 'data' is your normalized state (ids, entities) from the adapter
+      //  We safely access the user from the entities dictionary
+      user: data?.entities[userId as string],
       isLoading,
       isSuccess,
       isError,

@@ -2,15 +2,24 @@ import { useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks";
 import type { RootState } from "../../store";
-import { selectAllusers } from "../users/usersSlice";
 import {
   selectPostById,
   useDeletePostMutation,
   useUpdatePostMutation,
 } from "./postsSlice";
+import { useGetUsersQuery } from "../users/usersSlice";
 
 const EditPostForm = () => {
   const { postId } = useParams();
+
+  const { data: users, isSuccess } = useGetUsersQuery();
+  let usersOptions;
+  if (isSuccess) {
+    usersOptions = users.ids.map((id) => (
+      <option key={id}>{users.entities[id].name}</option>
+    ));
+  }
+
   const navigate = useNavigate();
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
@@ -19,7 +28,6 @@ const EditPostForm = () => {
   const post = useAppSelector((state: RootState) =>
     selectPostById(state, postId as string)
   );
-  const users = useAppSelector(selectAllusers);
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.body || "");
   const [userId, setUserId] = useState(post?.userId || "");
@@ -71,11 +79,7 @@ const EditPostForm = () => {
       console.log("Failed to delete the post", err);
     }
   };
-  const usersOptions = users.map((user) => (
-    <option key={user.id} value={user.id}>
-      {user.name}
-    </option>
-  ));
+
   return (
     <section>
       <h2>Add a New Post</h2>

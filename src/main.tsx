@@ -5,13 +5,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./redux/rtlblog/App.tsx";
 import { store } from "./redux/rtlblog/store.ts";
-import { fetchUsers } from "./redux/rtlblog/features/users/usersSlice.ts";
-import { extenedApiSlice } from "./redux/rtlblog/features/posts/postsSlice.ts";
+import { extenedApiSlice as postApiSlice } from "./redux/rtlblog/features/posts/postsSlice.ts";
+import { extenedApiSlice as userApiSlice } from "./redux/rtlblog/features/users/usersSlice.ts";
 
 // Wait for initial data
 await Promise.all([
-  store.dispatch(fetchUsers()),
-  store.dispatch(extenedApiSlice.endpoints.getPosts.initiate()),
+  store.dispatch(userApiSlice.endpoints.getUsers.initiate()),
+  store.dispatch(postApiSlice.endpoints.getPosts.initiate()),
 ]);
 
 createRoot(document.getElementById("root")!).render(

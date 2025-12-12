@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
-import { selectAllusers } from "../users/usersSlice";
+import { useGetUsersQuery } from "../users/usersSlice";
 
 // need to destructure userId
 const PostAuthor = ({ userId }: { userId: string | undefined }) => {
-  const users = useAppSelector(selectAllusers);
-  const author = users.find((user) => user.id === userId);
+  const { user: author } = useGetUsersQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      user: data?.entities[userId as string],
+    }),
+  });
   return (
     <span>
       by{" "}

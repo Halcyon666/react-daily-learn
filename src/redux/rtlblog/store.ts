@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./features/api/apiSlice";
-import usersReducer from "./features/users/usersSlice";
 
 export const store = configureStore({
   reducer: {
-    users: usersReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   // Caching Lifecycle Management Polling & Invalidation

@@ -1,7 +1,6 @@
 import { useState, type ChangeEvent } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectAllusers } from "../users/usersSlice";
+import { useGetUsersQuery } from "../users/usersSlice";
 import { useAddNewPostMutation } from "./postsSlice";
 
 const AddPostForm = () => {
@@ -11,7 +10,6 @@ const AddPostForm = () => {
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
 
-  const users = useSelector(selectAllusers);
   const navigate = useNavigate();
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -39,12 +37,15 @@ const AddPostForm = () => {
     }
   };
 
-  const usersOptions = users.map((user) => (
-    <option key={user.id} value={user.id}>
-      {user.name}
-    </option>
-  ));
+  const { data: users, isSuccess } = useGetUsersQuery();
+  let usersOptions;
+  if (isSuccess) {
+    usersOptions = users.ids.map((id) => (
+      <option key={id}>{users.entities[id].name}</option>
+    ));
+  }
 
+  console.log("usersOptions", users?.ids);
   return (
     <section>
       <h2>Add a New Post</h2>
