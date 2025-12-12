@@ -1,13 +1,9 @@
 import { Link } from "react-router-dom";
-import { useGetUsersQuery } from "../users/usersSlice";
+import { useGetUserById } from "../users/usersSlice";
 
 // need to destructure userId
 const PostAuthor = ({ userId }: { userId: string | undefined }) => {
-  const { user: author } = useGetUsersQuery(undefined, {
-    selectFromResult: ({ data }) => ({
-      user: data?.entities[userId as string],
-    }),
-  });
+  const { user: author } = useGetUserById(userId as string);
   return (
     <span>
       by{" "}

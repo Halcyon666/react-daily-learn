@@ -47,7 +47,6 @@ const AddPostForm = () => {
     ));
   }
 
-  console.log("usersOptions", users?.ids);
   return (
     <section>
       <h2>Add a New Post</h2>

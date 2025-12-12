@@ -22,12 +22,24 @@ export const extenedApiSlice = baseApiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              { type: "Post" as const, id: "LIST" },
+              { type: "User" as const, id: "LIST" },
               ...result.ids.map((id) => ({ type: "Post" as const, id })),
             ]
-          : [{ type: "Post" as const, id: "LIST" }],
+          : [{ type: "User" as const, id: "LIST" }],
     }),
   }),
 });
+
+export const useGetUserById = (userId: string) => {
+  return useGetUsersQuery(undefined, {
+    selectFromResult: ({ data, isLoading, isSuccess, isError, error }) => ({
+      user: data?.entities[userId],
+      isLoading,
+      isSuccess,
+      isError,
+      error,
+    }),
+  });
+};
 
 export const { useGetUsersQuery } = extenedApiSlice;

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetPostsByUserIdQuery } from "../posts/postsSlice";
-import { useGetUsersQuery } from "./usersSlice";
+import { useGetUserById } from "./usersSlice";
 
 const UserPage = () => {
   const { userId } = useParams();
@@ -17,17 +17,7 @@ const UserPage = () => {
     isSuccess: isSuccessUser,
     isError: isErrorUser,
     error: errorUser,
-  } = useGetUsersQuery(undefined, {
-    selectFromResult: ({ data, isLoading, isSuccess, isError, error }) => ({
-      // 'data' is your normalized state (ids, entities) from the adapter
-      //  We safely access the user from the entities dictionary
-      user: data?.entities[userId as string],
-      isLoading,
-      isSuccess,
-      isError,
-      error,
-    }),
-  });
+  } = useGetUserById(userId as string);
 
   let content;
   if (isLoading || isLoadingUser) {
