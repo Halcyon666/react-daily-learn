@@ -1,25 +1,18 @@
-import { useAppSelector } from "../../hooks";
 import PostExcerpt from "./PostExcerpt";
-import { selectPostIds, useGetPostsQuery } from "./postsSlice";
+import { useGetPostsQuery } from "./postsSlice";
 
 const PostsList = () => {
-  const { isLoading, isSuccess, isError, error } = useGetPostsQuery();
-  const orderedPostIds = useAppSelector(selectPostIds);
+  const { data: posts, isLoading, isError, error } = useGetPostsQuery();
 
-  let content;
-  if (isLoading) {
-    content = <p>"loading..."</p>;
-  } else if (isSuccess) {
-    // 正确写法：先拿 id，再用 selectByPostId 获取对应实体
-    content = orderedPostIds.map((id) => <PostExcerpt key={id} id={id} />);
-  } else if (isError) {
-    content = <p>{JSON.stringify(error)}</p>;
-  }
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>{JSON.stringify(error)}</p>;
 
   return (
-    <>
-      <section>{content}</section>
-    </>
+    <section>
+      {posts?.ids.map((postId) => (
+        <PostExcerpt key={postId} id={postId as string} />
+      ))}
+    </section>
   );
 };
 

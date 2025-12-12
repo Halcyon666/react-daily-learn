@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
 import PostAuthor from "./PostAuthor";
 import ReactionButtons from "./ReactionButtons";
 import TimeAgo from "./TimeAgo";
-import { selectPostById } from "./postsSlice";
+import { useGetPostById } from "./postsSlice";
 
 const PostExcerpt = ({ id }: { id: string }) => {
   // 在 PostExcerpt 里根据 id 取数据
-  const post = useAppSelector((state) => selectPostById(state, id));
+  const { post } = useGetPostById(id);
+  if (!post) {
+    return (
+      <section>
+        <h2>Post not found!</h2>
+      </section>
+    );
+  }
   return (
     <article>
       <h2>{post.title}</h2>

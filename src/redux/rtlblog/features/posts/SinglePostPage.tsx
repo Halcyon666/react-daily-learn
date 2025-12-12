@@ -1,15 +1,13 @@
 import { Link, useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
 import PostAuthor from "./PostAuthor";
-import { selectPostById } from "./postsSlice";
 import ReactionButtons from "./ReactionButtons";
 import TimeAgo from "./TimeAgo";
+import { useGetPostById } from "./postsSlice";
 
 const SinglePostPage = () => {
   const { postId } = useParams();
-  const post = useAppSelector((state) =>
-    selectPostById(state, postId as string)
-  );
+  const { post } = useGetPostById(postId as string);
+
   if (!post) {
     return (
       <section>

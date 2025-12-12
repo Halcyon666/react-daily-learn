@@ -194,6 +194,18 @@ const selectPostsData = createSelector(
   (postsResult) => postsResult.data
 );
 
+export const useGetPostById = (postId: string) => {
+  return useGetPostsQuery(undefined, {
+    selectFromResult: ({ data, isLoading, isSuccess, isError, error }) => ({
+      post: data?.entities[postId],
+      isLoading,
+      isSuccess,
+      isError,
+      error,
+    }),
+  });
+};
+
 // Selectors: derive the EntityState<PostData> from the RTK Query cache
 export const {
   selectAll: selectAllPosts,

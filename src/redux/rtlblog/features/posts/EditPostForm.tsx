@@ -1,38 +1,27 @@
 import { useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
-import type { RootState } from "../../store";
+import { useGetUsersQuery } from "../users/usersSlice";
 import {
-  selectPostById,
   useDeletePostMutation,
+  useGetPostById,
   useUpdatePostMutation,
 } from "./postsSlice";
-import { useGetUsersQuery } from "../users/usersSlice";
 
 const EditPostForm = () => {
   const { postId } = useParams();
 
+  // 1. fetch data
   const { data: users, isSuccess } = useGetUsersQuery();
-  let usersOptions;
-  if (isSuccess) {
-    usersOptions = users.ids.map((id) => (
-      <option key={id} value={id}>
-        {users.entities[id].name}
-      </option>
-    ));
-  }
-
-  const navigate = useNavigate();
+  const { post, isLoading: isLoadingPost } = useGetPostById(postId as string);
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
 
-  const post = useAppSelector((state: RootState) =>
-    selectPostById(state, postId as string)
-  );
-  const [title, setTitle] = useState(post?.title || "");
-  const [content, setContent] = useState(post?.body || "");
-  const [userId, setUserId] = useState(post?.userId || "");
+  // 2. Initialize State (Start empty)
+  const [title, setTitle] = useState(post?.title);
+  const [content, setContent] = useState(post?.body);
+  const [userId, setUserId] = useState(post?.userId);
+  const navigate = useNavigate();
 
   if (!post) {
     return (
@@ -42,12 +31,25 @@ const EditPostForm = () => {
     );
   }
 
+  // 3. Events
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setContent(e.target.value);
   const onUserIdChange = (e: ChangeEvent<HTMLSelectElement>) =>
     setUserId(e.target.value);
+  const deletePostClick = async () => {
+    try {
+      await deletePost({ id: post.id }).unwrap();
+      setTitle("");
+      setContent("");
+      setUserId("");
+      navigate("/");
+    } catch (err) {
+      console.log("Failed to delete the post", err);
+    }
+  };
+
   const canUpdate = [title, content, userId].every(Boolean) && !isLoading;
   const updatePostClick = async () => {
     if (canUpdate) {
@@ -69,18 +71,23 @@ const EditPostForm = () => {
     }
   };
 
-  const deletePostClick = async () => {
-    try {
-      await deletePost({ id: post.id }).unwrap();
+  // 4. Content of page
+  let usersOptions;
+  if (isSuccess) {
+    usersOptions = users.ids.map((id) => (
+      <option key={id} value={id}>
+        {users.entities[id].name}
+      </option>
+    ));
+  }
 
-      setTitle("");
-      setContent("");
-      setUserId("");
-      navigate("/");
-    } catch (err) {
-      console.log("Failed to delete the post", err);
-    }
-  };
+  if (!isLoading && !isLoadingPost) {
+    return (
+      <section>
+        <h2>Post not found!</h2>
+      </section>
+    );
+  }
 
   return (
     <section>
