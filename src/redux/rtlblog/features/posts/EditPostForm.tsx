@@ -8,21 +8,22 @@ import {
   type PostData,
 } from "./postsSlice";
 
-// =========================================================
-// 1. THE INTERNAL FORM COMPONENT
-//    (This is "Private". It assumes data is already loaded)
-// =========================================================
-const EditPostFormUI = ({ post }: { post: PostData }) => {
+// ==========================================
+// 1. THE FORM (Receives 'onDelete' as a prop)
+// ==========================================
+const EditPostFormUI = ({
+  post,
+  onDelete,
+}: {
+  post: PostData;
+  onDelete: () => Promise<void>;
+}) => {
   const navigate = useNavigate();
-
-  // ✅ useState works perfectly now because 'post' is fully loaded
-  //    before this component is ever created.
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.body);
   const [userId, setUserId] = useState(post.userId);
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
-  const [deletePost] = useDeletePostMutation();
   const { data: users, isSuccess } = useGetUsersQuery();
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -47,15 +48,6 @@ const EditPostFormUI = ({ post }: { post: PostData }) => {
       } catch (err) {
         console.error("Failed to update post", err);
       }
-    }
-  };
-
-  const deletePostClick = async () => {
-    try {
-      await deletePost({ id: post.id }).unwrap();
-      navigate("/");
-    } catch (err) {
-      console.error("Failed to delete post", err);
     }
   };
 
@@ -94,11 +86,8 @@ const EditPostFormUI = ({ post }: { post: PostData }) => {
         <button type="button" onClick={updatePostClick} disabled={!canUpdate}>
           Save Post
         </button>
-        <button
-          type="button"
-          className="deleteButton"
-          onClick={deletePostClick}
-        >
+        {/* 👇 Using the prop function now */}
+        <button type="button" className="deleteButton" onClick={onDelete}>
           Delete Post
         </button>
       </form>
@@ -106,18 +95,36 @@ const EditPostFormUI = ({ post }: { post: PostData }) => {
   );
 };
 
-// =========================================================
-// 2. THE MAIN EXPORT (The Container)
-//    (This is what your Router talks to)
-// =========================================================
+// ==========================================
+// 2. THE WRAPPER (Now handles Delete logic)
+// ==========================================
 const EditPost = () => {
   const { postId } = useParams();
+  const navigate = useNavigate();
+
   const { post, isLoading } = useGetPostById(postId as string);
 
-  // 1. Handle Loading
+  // 👇 1. Move Delete Mutation HERE
+  const [deletePost] = useDeletePostMutation();
+  // 👇 2. Track a local "isDeleting" state to prevent the 404 flash
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true); // Stop rendering "Not found"
+      await deletePost({ id: postId }).unwrap();
+      navigate("/");
+    } catch (err) {
+      setIsDeleting(false); // Reset if it failed
+      console.error("Failed to delete post", err);
+    }
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
-  // 2. Handle Missing Data
+  // 👇 3. If deleting, render nothing (or a spinner) to prevent 404 flash
+  if (isDeleting) return null;
+
   if (!post) {
     return (
       <section>
@@ -126,10 +133,8 @@ const EditPost = () => {
     );
   }
 
-  // 3. Render the Form ONLY when data is ready
-  //    The 'key' prop is an industry trick: if the ID changes,
-  //    React completely resets the form state for the new post.
-  return <EditPostFormUI post={post} key={post.id} />;
+  // 👇 4. Pass the delete handler down
+  return <EditPostFormUI post={post} key={post.id} onDelete={handleDelete} />;
 };
 
 export default EditPost;
