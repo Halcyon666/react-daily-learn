@@ -16,7 +16,9 @@ const EditPostForm = () => {
   let usersOptions;
   if (isSuccess) {
     usersOptions = users.ids.map((id) => (
-      <option key={id}>{users.entities[id].name}</option>
+      <option key={id} value={id}>
+        {users.entities[id].name}
+      </option>
     ));
   }
 

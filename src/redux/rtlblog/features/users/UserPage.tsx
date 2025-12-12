@@ -50,12 +50,7 @@ const UserPage = () => {
     content = <p>{JSON.stringify(error) || JSON.stringify(errorUser)}</p>;
   }
 
-  return (
-    <section>
-      <h2>{user?.name}</h2>
-      <ol>{content}</ol>
-    </section>
-  );
+  return content;
 };
 
 export default UserPage;

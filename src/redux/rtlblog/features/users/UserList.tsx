@@ -29,12 +29,7 @@ const UserList = () => {
     content = <p>{JSON.stringify(error)}</p>;
   }
 
-  return (
-    <section>
-      <h2>Users</h2>
-      <ul>{content}</ul>
-    </section>
-  );
+  return content;
 };
 
 export default UserList;
