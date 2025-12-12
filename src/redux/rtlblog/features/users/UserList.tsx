@@ -1,18 +1,38 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
-import { selectAllusers } from "./usersSlice";
+import { useGetUsersQuery } from "./usersSlice";
 
 const UserList = () => {
-  const users = useAppSelector(selectAllusers);
-  const renderedUsers = users.map((user) => (
-    <li key={user.id}>
-      <Link to={`/user/${user.id}`}>{user.name}</Link>
-    </li>
-  ));
+  const {
+    data: users,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetUsersQuery();
+
+  let content;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (isSuccess) {
+    const renderedUsers = users.ids.map((id) => (
+      <li key={id}>
+        <Link to={`/user/${id}`}>{users.entities[id].name}</Link>
+      </li>
+    ));
+    content = (
+      <section>
+        <h2>Users</h2>
+        <ul>{renderedUsers}</ul>
+      </section>
+    );
+  } else if (isError) {
+    content = <p>{JSON.stringify(error)}</p>;
+  }
+
   return (
     <section>
       <h2>Users</h2>
-      <ul>{renderedUsers}</ul>
+      <ul>{content}</ul>
     </section>
   );
 };
